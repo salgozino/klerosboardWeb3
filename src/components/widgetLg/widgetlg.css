@@ -1,0 +1,56 @@
+.widgetLg{
+    flex: 2;
+    -webkit-box-shadow: 5px 4px 9px 5px rgba(115,115,115,0.52); 
+    box-shadow: 5px 4px 9px 5px rgba(115,115,115,0.52);
+    padding: 20px;
+    margin-right: 20px;
+}
+
+.widgetLgTitle{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.widgetLgTable{
+    width: 100%;
+    border-spacing: 20px;
+}
+
+.widgetLgTr{
+
+}
+
+.widgetLgTh{
+    text-align: left;
+}
+
+.widgetLgCourtName{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin-right: 10px;
+
+}
+
+.widgetLgOpendisputes, .widgetLgTotaldisputes{
+    font-weight: 300;
+}
+
+
+.widgetLgButton{
+    padding: 5px 7px;
+    border: none;
+    border-radius: 10px;
+}
+
+.widgetLgButton.Approved{
+    background-color: lightgreen;
+}
+
+.widgetLgButton.Declined{
+    background-color: lightsalmon;
+}
+
+.widgetLgButton.Pending{
+    background-color: lightgrey;
+}
