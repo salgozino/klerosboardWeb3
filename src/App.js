@@ -2,13 +2,13 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/home/Home"
 import Courts from "./pages/courts/Courts"
+import Court from "./pages/court/Court";
 import "./app.css"
 import {
   BrowserRouter as Router,
   Route,
   Routes,
 } from "react-router-dom";
-import Court from "./pages/court/Court";
 
 function App() {
 
