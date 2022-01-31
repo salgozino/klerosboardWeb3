@@ -14,3 +14,10 @@
     font-size: 32px;
     font-weight: 600;
 }
+
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}

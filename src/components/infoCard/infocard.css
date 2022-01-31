@@ -1,8 +1,3 @@
-.featured{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
 
 .featuredItem{
     flex: 1;
@@ -10,19 +5,20 @@
     padding: 30px;
     border-radius: 10px;
     cursor: pointer;
-    background-color: rgb(192, 189, 190);
+    background-color: rgb(224, 224, 224);
     -webkit-box-shadow: 5px 4px 9px 5px rgba(115,115,115,0.52); 
     box-shadow: 5px 4px 9px 5px rgba(115,115,115,0.52);
 
 }
 
 .featuredTitle{
-    font-size: 20px importat !important;
+    font-size: 25px importat !important;
+    font-weight: 600;
 }
 
 .featuredMoney{
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 30px;   
+    font-weight: normal;
 }
 
 .featuredMoneyContainer{

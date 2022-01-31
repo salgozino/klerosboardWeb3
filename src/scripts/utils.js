@@ -30,3 +30,9 @@ export function getCourtsNames(courts) {
     
 }   
  
+
+export function wei2eth(wei) {
+    wei = Number(wei);
+    // console.log(wei);
+    return wei * 10**(-18);
+}
