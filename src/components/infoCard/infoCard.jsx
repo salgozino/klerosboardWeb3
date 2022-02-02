@@ -1,7 +1,20 @@
 import "./infocard.css"
 import {ArrowDownward, ArrowUpward} from "@mui/icons-material"
+import Skeleton from '@mui/material/Skeleton';
 
-export default function InfoCard({info}) {
+export default function InfoCard({info, loading}) {
+  if (loading){
+    return (
+      <div className="featuredItem">
+        <span className="featuredTitle">{info.title}</span>
+        <div className="featuredMoneyContainer">
+          
+          <Skeleton variant="rectangular" width={210} height={118} />            
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="featuredItem">
       <span className="featuredTitle">{info.title}</span>

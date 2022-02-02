@@ -21,3 +21,19 @@
     justify-content: space-between;
     margin-bottom: 30px;
 }
+
+.rowTable{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    height: 300px;
+}
+
+.column{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 20px 30px;
+}

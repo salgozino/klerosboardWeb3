@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import InfoCard from "../../components/infoCard/infoCard";
 import InfoCardList from "../../components/infoCardList/infoCardList";
 import Table from "../../components/table/Table";
-import ConvertSectoDayHour from "../../scripts/secondsToDate";
+import {sec2DayHour, timestamp2Datetime} from "../../scripts/timeUtils";
 import {wei2eth} from "../../scripts/utils";
 import { gql, useQuery } from "@apollo/client";
-import LinearProgress from '@mui/material/LinearProgress';
+
 
 
 
@@ -74,8 +74,8 @@ function disputesParser(disputes) {
             {'id':dispute.id,
              'status': dispute.period,
              'currentRulling': dispute.currentRulling,
-             'lastPeriodChange': dispute.lastPeriodChange,
-            'periodEnds': dispute.lastPeriodChange
+             'lastPeriodChange': timestamp2Datetime(dispute.lastPeriodChange),
+             'periodEnds': timestamp2Datetime(dispute.lastPeriodChange)
             }
         )
     });
@@ -85,18 +85,23 @@ export default function Court() {
     const { courtId } = useParams();
 
     const jurors_cols = [
-        { field: 'id', headerName: 'Juror', width: 70, type: 'string'},
-        { field: 'stake', headerName: 'Stake', width: 200, renderCell: (stake) => {
-          return (wei2eth(stake))
-        }}
+        { field: 'id', headerName: 'Juror', width: 400, type: 'string'},
+        { field: 'stake', headerName: 'Stake', width: 200, renderCell: (params) => {
+            const options = {
+                style: 'currency',
+                currency: 'PNK',
+                maximumFractionDigits: 0
+            }
+            return params.value.toLocaleString(undefined, options);
+        },}
     ]
 
     const dispute_cols = [
-        { field: 'id', headerName: 'Dispute N°', width: 70, type: 'string'},
-        { field: 'status', headerName: 'Status', width: 200},
-        { field: 'currentRulling', headerName: 'Current Rulling', width: 200},
-        { field: 'lastPeriodChange', headerName: 'Last Period Change', width: 200},
-        { field: 'periodEnds', headerName: 'Period Ends', width: 200}
+        { field: 'id', headerName: 'Dispute N°', width: 100, type: 'string'},
+        { field: 'status', headerName: 'Status', width: 100},
+        { field: 'currentRulling', headerName: 'Current Rulling', width: 120},
+        { field: 'lastPeriodChange', headerName: 'Last Period Change', width: 180},
+        { field: 'periodEnds', headerName: 'Period Ends', width: 180}
     ]
 
     const {error: error_court, data: data_court, loading: loading_court} = useQuery(COURT, {variables: {courtId: courtId}});
@@ -112,48 +117,46 @@ export default function Court() {
             <div className="courtTitleContainer">
                 <h1 className="courtTitle">Court {courtId}</h1>
             </div>
-            {loading_court? <LinearProgress />:
             <div>
                 <div className="row">
-                    <InfoCard info={{'title': 'Parent Court','value': data_court.courts[0].parent? <a href={"/courts/"+data_court.courts[0].parent.id}>{data_court.courts[0].parent.id}</a>: "-"}} />
-                    <InfoCardList info={{'title':'Children Courts', 'values':data_court.courts[0].childs.map((child) => {return child.id;})}}/>
-                    <InfoCardList info={{'title':'Times per Period', 'values':data_court.courts[0].timePeriods.map(ConvertSectoDayHour)}}/>
-                    <InfoCard info={{'title': 'Jurors for Court Jump','value': data_court.courts[0].jurorsForCourtJump}} />
+                    <InfoCard loading={loading_court} info={{'title': 'Parent Court','value': loading_court?null:data_court.courts[0].parent? <a href={"/courts/"+data_court.courts[0].parent.id}>{data_court.courts[0].parent.id}</a>: "-"}} />
+                    <InfoCardList loading={loading_court} info={{'title':'Children Courts', 'values':loading_court?null:data_court.courts[0].childs.map((child) => {return child.id;})}}/>
+                    <InfoCardList loading={loading_court} info={{'title':'Times per Period', 'values':loading_court?null:data_court.courts[0].timePeriods.map(sec2DayHour)}}/>
+                    <InfoCard loading={loading_court} info={{'title': 'Jurors for Court Jump','value': loading_court?null:data_court.courts[0].jurorsForCourtJump}} />
                 </div>
                 <div className="row">
                 
-                <InfoCard info={{'title': 'Total Disputes','value': data_court.courts[0].disputesNum}} />
-                <InfoCard info={{'title': 'Ongoing Disputes','value': data_court.courts[0].disputesOngoing}} />
-                <InfoCard info={{'title': 'Ruled Disputes','value': data_court.courts[0].disputesClosed}} />
+                <InfoCard loading={loading_court} info={{'title': 'Total Disputes','value': loading_court?null:data_court.courts[0].disputesNum}} />
+                <InfoCard loading={loading_court} info={{'title': 'Ongoing Disputes','value': loading_court?null:data_court.courts[0].disputesOngoing}} />
+                <InfoCard loading={loading_court} info={{'title': 'Ruled Disputes','value': loading_court?null:data_court.courts[0].disputesClosed}} />
                 </div>
                 <div className="row">
-                <InfoCard info={{'title': 'Min Stake','value': wei2eth(data_court.courts[0].minStake).toFixed(0) + ' PNK'}} />
-                <InfoCard info={{'title': 'Vote Stake','value': (wei2eth(data_court.courts[0].minStake) * Number(data_court.courts[0].alpha) / 10000).toFixed(0) + ' PNK'}} />
-                <InfoCard info={{'title': 'Vote Reward','value': wei2eth(data_court.courts[0].feeForJuror).toFixed(2) + ' ETH'}} />
+                <InfoCard loading={loading_court} info={{'title': 'Min Stake','value': loading_court?null:wei2eth(data_court.courts[0].minStake).toFixed(0) + ' PNK'}} />
+                <InfoCard loading={loading_court} info={{'title': 'Vote Stake','value': loading_court?null:(wei2eth(data_court.courts[0].minStake) * Number(data_court.courts[0].alpha) / 10000).toFixed(0) + ' PNK'}} />
+                <InfoCard loading={loading_court} info={{'title': 'Vote Reward','value': loading_court?null:wei2eth(data_court.courts[0].feeForJuror).toFixed(2) + ' ETH'}} />
                 </div>
                 <div className="row">
-                <InfoCard info={{'title': 'Active Jurors of this court','value': data_court.courts[0].activeJurors}} />
-                <InfoCard info={{'title': 'Active Jurors with subcourts','value': data_court.courts[0].activeJurors}} />
-                <InfoCard info={{'title': 'Token Staked in this court','value': wei2eth(data_court.courts[0].tokenStaked).toFixed(0)}} />
-                <InfoCard info={{'title': 'Token Staked with subcourts','value': wei2eth(data_court.courts[0].tokenStaked).toFixed(0)}} />
+                <InfoCard loading={loading_court} info={{'title': 'Active Jurors of this court','value': loading_court?null:data_court.courts[0].activeJurors}} />
+                <InfoCard loading={loading_court} info={{'title': 'Active Jurors with subcourts','value': loading_court?null:data_court.courts[0].activeJurors}} />
+                <InfoCard loading={loading_court} info={{'title': 'Token Staked in this court','value': loading_court?null:wei2eth(data_court.courts[0].tokenStaked).toFixed(0)}} />
+                <InfoCard loading={loading_court} info={{'title': 'Token Staked with subcourts','value': loading_court?null:wei2eth(data_court.courts[0].tokenStaked).toFixed(0)}} />
                 </div>
             </div>
-            }
-        
-            <h2>Jurors</h2>
+
             <div className="row">
-            {loading_jurors?
-                <LinearProgress />:
-                <Table columns={jurors_cols} rows={loading_jurors ? null : courtStakesParser(data_jurors.courtStakes)} loading={loading_jurors} />
-            }
-            </div>
-        
-            <h2>Disputes</h2>
-            <div className="row">
-            {loading_disputes?
-                <LinearProgress />:
-                <Table columns={dispute_cols} rows={loading_disputes ? null : disputesParser(data_disputes.disputes)} loading={loading_disputes} />
-            }
+                <div className="column">
+                    <h2>Jurors</h2>
+                    <div className="rowTable">
+                        <Table columns={jurors_cols} rows={loading_jurors ? [] : courtStakesParser(data_jurors.courtStakes)} loading={loading_jurors} defaultSort={{ field: 'stake', sort: 'desc' }}/>
+                    </div>
+                </div>
+                
+                <div className="column">
+                    <h2>Disputes</h2>
+                    <div className="rowTable">
+                        <Table columns={dispute_cols} rows={loading_disputes ? [] : disputesParser(data_disputes.disputes)} loading={loading_disputes} defaultSort={{ field: 'id', sort: 'desc' }}/>
+                    </div>
+                </div>
             </div>
         </div>
     )

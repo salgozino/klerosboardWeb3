@@ -15,7 +15,12 @@ export function ConvertSectoDayHourMinSec(n) {
     seconds.toFixed() + " seconds ");
 }
 
-export default function ConvertSectoDayHour(n) {
+export function timestamp2Datetime(timestamp) {
+    var date = new Date(timestamp * 1000);
+    return date.toDateString() + ' - ' + date.getHours() + ':' + date.getMinutes()
+}
+
+export function sec2DayHour(n) {
     var day =parseInt( n / (24 * 3600));
 
     n = n % (24 * 3600);
