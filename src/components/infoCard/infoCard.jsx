@@ -1,6 +1,7 @@
 import "./infocard.css"
 import {ArrowDownward, ArrowUpward} from "@mui/icons-material"
 import Skeleton from '@mui/material/Skeleton';
+import { Link } from "react-router-dom";
 
 export default function InfoCard({info, loading, baseURL}) {
   if (loading){
@@ -20,7 +21,7 @@ export default function InfoCard({info, loading, baseURL}) {
       <span  className="featuredTitle">{info.title}</span>
       <div className="featuredMoneyContainer">
           {baseURL?
-            <a href={baseURL + '/' + info.id} className="featuredMoney">{info.value}</a>
+            <Link to={baseURL + '/' + info.id} className="featuredMoney">{info.value}</Link>
             : <span className="featuredMoney">{info.value}</span>
         }
           

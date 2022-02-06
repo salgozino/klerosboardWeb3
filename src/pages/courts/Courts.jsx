@@ -4,6 +4,7 @@ import { ALLCOURTS } from "../../queries/courts"
 import { useState } from "react";
 import Table from "../../components/table/Table"
 import { getCourtsNames, wei2eth } from "../../scripts/utils";
+import { Link } from "react-router-dom";
 
 
 export default function Courts() {
@@ -45,7 +46,7 @@ export default function Courts() {
   const columns = [
     { field: 'id', headerName: 'ID', width: 70, type: 'number' },
     { field: 'name', headerName: 'Court Name', width: 200, renderCell: (params) => {
-      return (<a href={"courts/"+params.id}>{params.row.name}</a>)
+      return (<Link to={"/courts/"+params.id}>{params.row.name}</Link>)
     }},
     { field: 'tokenStaked', headerName: 'Total Staked', width: 150, type: 'number', valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });
