@@ -1,33 +1,22 @@
 
-export async function getCourtName(policy) {
+export async function getCourtName(policy){
     if (policy == null) return 'Unknown';
     const url = "https://ipfs.kleros.io" + policy
-    const res = fetch(url)
-    let name = null
-    res.then(async (res) => {
-        let data = await res.json()
-        if (res.status === 200){
-            // console.log(data.name);
-            name = data.name;
-        } else {
-            name = 'Error getting the Name'
-        }
-    })
-    return name;
+    const response = await fetch(url);
+    const courtName = await response.json();
+    return courtName.name;
 }
 
-export function getCourtsNames(courts) {
+export async function getCourtsNames(courts) {
     if (courts == null | courts === undefined) return null;
-    console.log(courts)
-    var newCourts = []
+    var courtNamesPromises = []
     courts.forEach((court) => {
-        const newCourt = {...court}
-        var courtName = getCourtName(court.policy.policy);
-        newCourt.courtName = courtName
-        newCourts.push(newCourt);
+        const courtName = getCourtName(court.policy.policy);
+        courtNamesPromises.push(courtName);
     })
-    return newCourts
-    
+    const courtNames = await Promise.all(courtNamesPromises)
+    return courtNames
+
 }   
  
 
