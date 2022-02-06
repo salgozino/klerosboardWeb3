@@ -32,3 +32,57 @@ export const COURTPOLICY = gql`
         }
     }
 `
+
+export const COURT = gql`
+    query court($courtId: String!) {
+        courts(where: {id: $courtId}) {
+            id
+            subcourtID
+            parent {
+            id
+            policy{policy}
+            }
+            childs {
+                id
+            }
+            activeJurors
+            disputesNum
+            disputesClosed
+            disputesOngoing
+            feeForJuror
+            minStake
+            alpha
+            tokenStaked
+            jurorsForCourtJump
+            timePeriods
+            policy {
+            policy
+            }
+        }
+    }   
+`
+
+export const COURTDISPUTES = gql`
+    query disputes($courtId: String!) {
+        disputes(orderBy: disputeID, orderDirection: desc, where:{subcourtID:$courtId}) {
+        id
+        arbitrable {
+        id
+        }
+        currentRulling
+        period
+        startTime
+        lastPeriodChange
+        ruled
+    }
+    }
+`
+
+export const JURORSSTAKE = gql`
+query courtJurors($courtId: String!) {
+    courtStakes(where:{court:$courtId, stake_gt:0}, first:1000) {
+        stake
+        juror {id}
+    }
+}
+`

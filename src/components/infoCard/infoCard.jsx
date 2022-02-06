@@ -2,7 +2,7 @@ import "./infocard.css"
 import {ArrowDownward, ArrowUpward} from "@mui/icons-material"
 import Skeleton from '@mui/material/Skeleton';
 
-export default function InfoCard({info, loading}) {
+export default function InfoCard({info, loading, baseURL}) {
   if (loading){
     return (
       <div className="featuredItem">
@@ -17,9 +17,13 @@ export default function InfoCard({info, loading}) {
 
   return (
     <div className="featuredItem">
-      <span className="featuredTitle">{info.title}</span>
+      <span  className="featuredTitle">{info.title}</span>
       <div className="featuredMoneyContainer">
-          <span className="featuredMoney">{info.value}</span>
+          {baseURL?
+            <a href={baseURL + '/' + info.id} className="featuredMoney">{info.value}</a>
+            : <span className="featuredMoney">{info.value}</span>
+        }
+          
           {info.rate != null?
             <span className="featuredMoneyRate">{info.rate } {info.rate > 0?<ArrowUpward className="featuredIcon"/>:<ArrowDownward className="featuredIcon negative"/>} </span> 
             : null }

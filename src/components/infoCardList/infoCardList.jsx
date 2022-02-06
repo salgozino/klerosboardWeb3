@@ -1,8 +1,9 @@
 import { Skeleton } from "@mui/material";
 import "./infocardlist.css"
 
-export default function InfoCardList({info, loading}) {
+export default function InfoCardList({info, loading, baseURL}) {
 
+  console.log(baseURL)
     return (
       <div className="featuredItem">
         <span className="featuredTitle">{info.title}</span>
@@ -12,8 +13,12 @@ export default function InfoCardList({info, loading}) {
           : info.values.map((item, i) => {
             return (
               <li key={i} value={item}>
-                {item}
+              {baseURL?
+              <a href={baseURL + '/' + item}>{item}</a>
+              : item
+              }
               </li>
+              
             );
             })
           }
