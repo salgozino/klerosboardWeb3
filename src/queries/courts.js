@@ -33,6 +33,16 @@ export const COURTPOLICY = gql`
     }
 `
 
+export const ALLCOURTSPOLICY = gql`
+    query allCourtsPolicy {
+        courts(orderBy: id, orderDirection: asc) {
+            id
+            policy {
+            policy
+            }
+        }
+    }
+`
 export const COURT = gql`
     query court($courtId: String!) {
         courts(where: {id: $courtId}) {

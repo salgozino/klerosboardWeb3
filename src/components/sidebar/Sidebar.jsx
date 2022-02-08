@@ -23,6 +23,12 @@ export default function Sidebar() {
               </Link>  
               <Link to="/cases" className="sidebarListItem">
                 <li>
+                <Balance className='sidebarIcon'/>
+                Disputes
+                </li>
+              </Link>  
+              <Link to="/cases" className="sidebarListItem">
+                <li>
                 <AltRoute className='sidebarIcon'/>
                 Other
                 </li>
