@@ -3,7 +3,6 @@ import "./infocardlist.css"
 
 export default function InfoCardList({info, loading, baseURL}) {
 
-  console.log(baseURL)
     return (
       <div className="featuredItem">
         <span className="featuredTitle">{info.title}</span>
