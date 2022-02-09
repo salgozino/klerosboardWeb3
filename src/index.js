@@ -9,8 +9,7 @@ import {
 
 
 const client = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/salgozino/sarasa',
-
+  uri: 'https://api.thegraph.com/subgraphs/name/salgozino/sarasa-mainnet',
   cache: new InMemoryCache()
 });
 
