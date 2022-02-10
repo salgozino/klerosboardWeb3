@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "engines": {
-    "npm": "8.1.2",
-    "node": "14.17.5"
-  },
   "dependencies": {
     "@apollo/client": "^3.5.7",
     "@emotion/react": "^11.7.1",
