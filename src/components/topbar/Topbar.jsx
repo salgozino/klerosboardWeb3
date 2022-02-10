@@ -16,7 +16,7 @@ export default function Topbar() {
                 </div>
                 <div className="topbarIconContainer"><LinkIcon /></div>
 
-                <img src="https://www.prensalibre.com/wp-content/uploads/2021/06/milhouse-02.png" alt="" className="topAvatar" />
+                <img src="/milhouse.png" alt="" className="topAvatar" />
                 
             </div>
         </div>
