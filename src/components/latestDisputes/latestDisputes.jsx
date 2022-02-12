@@ -2,14 +2,11 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LASTDISPUTES } from "../../queries/disputes";
-import { timestamp2Datetime } from "../../scripts/timeUtils";
 import { getCourtName } from "../../scripts/utils";
-import "./widgetlg.css"
+import "./latestdisputes.css"
 
 
-
-
-export default function WidgetLg() {
+export default function LatestDisputes() {
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };

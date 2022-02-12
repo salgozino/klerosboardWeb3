@@ -1,7 +1,7 @@
-import "./widgetsm.css"
+import "./lateststakes.css"
 import {Visibility} from '@mui/icons-material';
 
-export default function WidgetSm() {
+export default function LatestStakes() {
   return (
   <div className="widgetSm">
     <span className="widgetSmTitle">New Jurors</span>
