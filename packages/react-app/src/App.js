@@ -12,16 +12,14 @@ import {
   Routes,
 } from "react-router-dom";
 
+
 function App() {
 
   return (
     <Router>
       <Topbar />
-
       <div className="container">
-
         <Sidebar />
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courts" element={<Courts />} />
