@@ -43,14 +43,18 @@
     border-radius: 10px;
 }
 
-.widgetLgButton.Approved{
+.widgetLgButton.evidence{
     background-color: lightgreen;
 }
 
-.widgetLgButton.Declined{
-    background-color: lightsalmon;
+.widgetLgButton.vote{
+    background-color: lightseagreen
 }
 
-.widgetLgButton.Pending{
+.widgetLgButton.execution{
     background-color: lightgrey;
+}
+
+.widgetLgButton.appeal{
+    background-color: lightsalmon;
 }

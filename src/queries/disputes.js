@@ -75,3 +75,40 @@ query dispute($disputeID: String!) {
 }
 `
 
+export const LASTDISPUTES = gql`
+query lastDisputes {
+  disputes(orderBy:disputeID, orderDirection:desc, first:10) {
+    id
+    arbitrable {
+      id
+    }
+    creator {
+      id
+    }
+    subcourtID {
+      id,
+      policy{policy}
+      timePeriods
+    }
+    rounds {
+      winningChoice
+      startTime
+      votes {
+        address {
+          id
+        }
+        choice
+        voted
+        voteID
+        timestamp
+      }
+    }
+    currentRulling
+    period
+    lastPeriodChange
+    startTime
+    ruled
+    jurorsInvolved {id}
+  }
+}
+`

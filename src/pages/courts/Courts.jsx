@@ -39,7 +39,7 @@ export default function Courts() {
     setCourtsData(newCourtsData)
   }
 
-  const {error, _, loading} = useQuery(ALLCOURTS, {onCompleted: handleCourtData});
+  const {error, foo, loading} = useQuery(ALLCOURTS, {onCompleted: handleCourtData});
   if (error) return <span>Upsss, an error has raised</span>
 
 
