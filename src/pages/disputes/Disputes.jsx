@@ -41,7 +41,7 @@ export default function Disputes() {
     setDisputesData(newDisputesData)
   }
 
-  const {error, _, loading} = useQuery(ALLDISPUTES, {onCompleted: handleDisputesData});
+  const {error, foo, loading} = useQuery(ALLDISPUTES, {onCompleted: handleDisputesData});
  
  
   

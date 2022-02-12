@@ -37,3 +37,41 @@ query alldisputes {
   }
 }
 `
+
+export const DISPUTE = gql`
+query dispute($disputeID: String!) {
+  disputes(where:{id:$disputeID}) {
+    id
+    arbitrable {
+      id
+    }
+    creator {
+      id
+    }
+    subcourtID {
+      id,
+      policy{policy}
+      timePeriods
+    }
+    rounds {
+      winningChoice
+      startTime
+      votes {
+        address {
+          id
+        }
+        choice
+        voted
+        voteID
+        timestamp
+      }
+    }
+    currentRulling
+    period
+    lastPeriodChange
+    startTime
+    ruled
+  }
+}
+`
+

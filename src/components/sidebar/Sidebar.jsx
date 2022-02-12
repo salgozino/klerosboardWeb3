@@ -1,5 +1,5 @@
 import "./sidebar.css"
-import { AltRoute, LineStyle, Balance } from '@mui/icons-material';
+import { AltRoute, LineStyle, Balance, Gavel } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -23,7 +23,7 @@ export default function Sidebar() {
               </Link>  
               <Link to="/cases" className="sidebarListItem">
                 <li>
-                <Balance className='sidebarIcon'/>
+                <Gavel className='sidebarIcon'/>
                 Disputes
                 </li>
               </Link>  
