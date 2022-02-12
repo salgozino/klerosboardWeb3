@@ -12,9 +12,9 @@ export default function LatestDisputes() {
   };
 
 
-  function createTableRow(dispute) {
+  function createTableRow(dispute, id) {
     return (
-      <tr className="widgetLgTr">
+      <tr className="widgetLgTr" key={id}>
         <td className="widgetLgCourt">
           <Link to={"/cases/" + dispute.id}> {dispute.id} </Link>
         </td>
@@ -62,8 +62,8 @@ export default function LatestDisputes() {
     });
 
     const tableRows = []
-    newDisputesData.forEach((dispute) => { 
-      const tableRow = createTableRow(dispute)
+    newDisputesData.forEach((dispute, id) => { 
+      const tableRow = createTableRow(dispute, id)
       tableRows.push(tableRow);
     })
     setdisputesTableRows(tableRows)
@@ -77,16 +77,17 @@ export default function LatestDisputes() {
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latests Disputes</h3>
       <table className="widgetLgTable">
+        <thead> 
         <tr className="widgetLgTr">
           <th className="widgetLgTh">Dispute ID</th>
           <th className="widgetLgTh">Court</th>
           <th className="widgetLgTh"># Jurors</th>
           <th className="widgetLgTh">Status</th>
         </tr>
-
-
-
+        </thead>
+        <tbody>
         {disputesTableRows}
+        </tbody>
       </table>
     </div>
   )
