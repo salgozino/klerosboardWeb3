@@ -1,6 +1,7 @@
 {
   "name": "@project/react-app",
   "version": "1.0.0",
+  "license": "MIT",
   "homepage": "./",
   "browserslist": {
     "production": [
