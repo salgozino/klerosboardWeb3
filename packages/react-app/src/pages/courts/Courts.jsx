@@ -35,7 +35,6 @@ export default function Courts() {
         'name': names[index]
       })
     })
-  
     setCourtsData(newCourtsData)
   }
 
@@ -68,13 +67,15 @@ export default function Courts() {
     { field: 'disputesNum', headerName: 'Total Disputes', type: 'number', width: 150},
     { field: 'disputesOngoing', headerName: 'Open Disputes', type: 'number', width: 150},
   ];
+
+  console.log(courtsData);
   return (
   
   <div className="courts">
-      <Table 
+      <Table stickyHeader
         rows = {courtsData}
         columns={columns}
-        loading={loading || courtsData === undefined}
+        loading={loading || courtsData.length === 0}
         defaultSort={{ field: 'id', sort: 'asc' }}
         />
 

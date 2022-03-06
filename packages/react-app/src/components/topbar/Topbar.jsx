@@ -1,6 +1,6 @@
 import "./topbar.css"
 import {NotificationsNone} from '@mui/icons-material';
-import LinkIcon from '@mui/icons-material/Link';
+import { LinkIcon } from '@material-ui/icons/Link'
 import useWeb3Modal from "../../hooks/useWeb3Modal";
 import { Button } from "../index";
 import { useState, useEffect } from "react";
