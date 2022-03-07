@@ -1,4 +1,4 @@
-import { Link as LinkRouter, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DISPUTE } from "../queries/disputes"
 import Skeleton from '@mui/material/Skeleton';
 import { useQuery } from "@apollo/client";
@@ -8,7 +8,7 @@ import { getCourtName, capitalizeFirstLetter, period2index, VotesMapping, countU
 import { timestamp2Datetime, sec2DayHour } from "../scripts/timeUtils";
 import RoundBox from "../components/RoundBox";
 import VotesCount from "../components/VotesCount";
-import { Container, Grid, Typography, Link } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 
 function remainingTime(lastPeriodChange, period, court_periods) {
@@ -20,9 +20,9 @@ function remainingTime(lastPeriodChange, period, court_periods) {
 
 export default function Dispute() {
 
-  const { disputeId } = useParams();
+  const { id } = useParams();
   const [courtName, setCourtName] = useState(<Skeleton variant="text" animation="wave" className="courtTitle" />);
-  const { error, data, loading } = useQuery(DISPUTE, { variables: { disputeID: disputeId } });
+  const { error, data, loading } = useQuery(DISPUTE, { variables: { disputeID: id } });
   if (error) { console.log(error) }
   const not_loading_and_data = !loading && data
 

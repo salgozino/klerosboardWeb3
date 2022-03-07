@@ -33,7 +33,7 @@ function disputesParser(disputes) {
 }
 
 export default function Court() {
-    const { courtId } = useParams();
+    const { id } = useParams();
     const [courtName, setCourtName] = useState(null);
     const [parentCourtName, setParentCourtName] = useState(null);
 
@@ -59,10 +59,10 @@ export default function Court() {
         { field: 'periodEnds', headerName: 'Period Ends', width: 180, flex: 2 }
     ]
 
-    const { error: error_court, data: data_court, loading: loading_court } = useQuery(COURT, { variables: { courtId: courtId } });
-    const { error: error_jurors, data: data_jurors, loading: loading_jurors } = useQuery(JURORSSTAKE, { variables: { courtId: courtId } });
-    const { error: error_disputes, data: data_disputes, loading: loading_disputes } = useQuery(COURTDISPUTES, { variables: { courtId: courtId } });
-    const { loading: loading_policy, data: court_policy, error: error_policy } = useQuery(COURTPOLICY, { variables: { courtId: courtId } });
+    const { error: error_court, data: data_court, loading: loading_court } = useQuery(COURT, { variables: { courtId: id } });
+    const { error: error_jurors, data: data_jurors, loading: loading_jurors } = useQuery(JURORSSTAKE, { variables: { courtId: id } });
+    const { error: error_disputes, data: data_disputes, loading: loading_disputes } = useQuery(COURTDISPUTES, { variables: { courtId: id } });
+    const { loading: loading_policy, data: court_policy, error: error_policy } = useQuery(COURTPOLICY, { variables: { courtId: id } });
 
     if (error_court) { console.log(error_court) };
     if (error_jurors) { console.log(error_jurors) };
@@ -106,7 +106,7 @@ export default function Court() {
         <Container>
 
             <Typography variant='h4' sx={{ marginBottom: '15px', width:'80%'}}>
-                Court {courtId}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%' fitContent/>}
+                Court {id}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%' fitContent/>}
             </Typography>
             
             {/* First Line */}

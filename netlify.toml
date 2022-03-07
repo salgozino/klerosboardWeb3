@@ -5,3 +5,4 @@
   from = "/*"
   to = "/"
   status = 200
+  query = {id = ":id"}

@@ -255,9 +255,9 @@ function DashboardContent() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/courts" element={<Courts />} />
-              <Route path="/courts/:courtId" element={<Court />} />
+              <Route path="/courts/:id" element={<Court />} />
               <Route path="/cases" element={<Disputes />} />
-              <Route path="/cases/:disputeId" element={<Dispute />} />
+              <Route path="/cases/:id" element={<Dispute />} />
               <Route path="/arbitrables" element={<Arbitrables />} />
               <Route path="/stakes" element={<Stakes />} />
               <Route path="/odds" element={<Odds />} />
