@@ -133,7 +133,7 @@ export default function Dispute() {
         <Grid item xs={2} md={6}>
           <InfoCard
             loading={loading}
-            baseURL= "/arbitrable"
+            baseURL= "/arbitrables"
             info={
               {
                 'title': 'Arbitrable',

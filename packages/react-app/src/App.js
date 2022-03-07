@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import {
+  BrowserRouter as Router,
+  Link as LinkRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
+
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
@@ -20,6 +27,9 @@ import { mainListItems, secondaryListItems } from './components/sideMenuItems';
 
 import useWeb3Modal from "./hooks/useWeb3Modal";
 import { Button } from "./components/index";
+import { Tooltip } from "@material-ui/core";
+import { Avatar } from "@mui/material";
+import ChainMenu from "./components/chainMenu";
 
 import Home from "./pages/Home"
 import Courts from "./pages/Courts"
@@ -31,15 +41,10 @@ import Support from "./pages/Support";
 import Community from "./pages/Community";
 import Stakes from "./pages/Stakes";
 import Arbitrables from "./pages/Arbitrables";
-import {
-  BrowserRouter as Router,
-  Link as LinkRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
-import { Tooltip } from "@material-ui/core";
-import { Avatar } from "@mui/material";
-import ChainMenu from "./components/chainMenu";
+import Profile from "./pages/Profile";
+import Arbitrable from "./pages/Arbitrable";
+
+
 
 
 
@@ -258,7 +263,9 @@ function DashboardContent() {
               <Route path="/courts/:id" element={<Court />} />
               <Route path="/cases" element={<Disputes />} />
               <Route path="/cases/:id" element={<Dispute />} />
+              <Route path="/profile/:id" element={<Profile />} />
               <Route path="/arbitrables" element={<Arbitrables />} />
+              <Route path="/arbitrables/:id" element={<Arbitrable />} />
               <Route path="/stakes" element={<Stakes />} />
               <Route path="/odds" element={<Odds />} />
               <Route path="/community" element={<Community />} />
