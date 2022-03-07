@@ -2,9 +2,9 @@ import { useQuery } from "@apollo/client";
 import { wei2eth } from "../scripts/utils";
 import { Person } from '@mui/icons-material/';
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as LinkRouter } from "react-router-dom";
 import { LASTSTAKES } from "../queries/stakes";
-import { Grid, List, ListItem, ListItemAvatar, ListItemText, Skeleton, Avatar, Chip, Typography, Paper } from "@mui/material";
+import { Grid, List, ListItem, ListItemAvatar, ListItemText, Skeleton, Avatar, Chip, Typography, Paper, Link } from "@mui/material";
 
 export default function LatestStakes() {
 
@@ -20,7 +20,7 @@ export default function LatestStakes() {
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary={<Link to={"/profile/" + stake.juror}>{stake.juror}</Link>}
+          primary={<Link component={LinkRouter} to={"/profile/" + stake.juror}>{stake.juror}</Link>}
           secondary={"Court: " + stake.subcourtId}>
         </ListItemText>
       </ListItem>

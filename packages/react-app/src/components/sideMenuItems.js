@@ -1,14 +1,15 @@
 
 import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 
-import { Link } from "react-router-dom";
+import { Link as LinkRouter} from "react-router-dom";
+import { Link } from '@mui/material';
 import { Feed, Casino, Dashboard, People, Gavel, Balance, Paid } from '@mui/icons-material';
 import { Fragment } from 'react';
 
 export const mainListItems = (
   <Fragment>
 
-    <Link to='/'>
+    <Link component={LinkRouter} to='/'>
       <ListItemButton>
 
         <ListItemIcon>
@@ -19,7 +20,7 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to='/odds'>
+    <Link component={LinkRouter} to='/odds'>
       <ListItemButton>
 
         <ListItemIcon>
@@ -30,7 +31,7 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to='/community'>
+    <Link component={LinkRouter} to='/community'>
       <ListItemButton>
 
         <ListItemIcon>
@@ -50,7 +51,7 @@ export const secondaryListItems = (
       Kleros Explorer
     </ListSubheader>
 
-    <Link to='/courts'>
+    <Link component={LinkRouter} to='/courts'>
       <ListItemButton>
         <ListItemIcon>
           <Balance />
@@ -59,7 +60,7 @@ export const secondaryListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to='/cases'>
+    <Link component={LinkRouter} to='/cases'>
       <ListItemButton>
         <ListItemIcon>
           <Gavel />
@@ -70,7 +71,7 @@ export const secondaryListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to='/arbitrables'>
+    <Link component={LinkRouter} to='/arbitrables'>
       <ListItemButton>
         <ListItemIcon>
           <Feed />
@@ -81,7 +82,7 @@ export const secondaryListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to='/stakes'>
+    <Link component={LinkRouter} to='/stakes'>
       <ListItemButton>
 
         <ListItemIcon>

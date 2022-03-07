@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { Table, TableBody, TableCell, TableHead, TableRow, Typography, Grid, Paper, Chip } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, Typography, Grid, Paper, Chip, Link } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as LinkRouter } from "react-router-dom";
 import { LASTDISPUTES } from "../queries/disputes";
 import { getCourtName } from "../scripts/utils";
 
@@ -13,7 +13,7 @@ export default function LatestDisputes() {
   function createTableRow(dispute, id) {
     return (
       <TableRow key={id}>
-        <TableCell><Link to={"/cases/" + dispute.id}> {dispute.id} </Link></TableCell>
+        <TableCell><Link component={LinkRouter} to={"/cases/" + dispute.id}> {dispute.id} </Link></TableCell>
         <TableCell><Typography>{dispute.courtName}</Typography></TableCell>
         <TableCell><Typography>{dispute.jurorsInvolved}</Typography></TableCell>
         <TableCell><Chip variant="outlined" label={dispute.period} style={{backgroundColor:buttonColors[dispute.period]}}  /></TableCell>

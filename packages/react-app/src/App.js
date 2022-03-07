@@ -21,11 +21,11 @@ import { mainListItems, secondaryListItems } from './components/sideMenuItems';
 import useWeb3Modal from "./hooks/useWeb3Modal";
 import { Button } from "./components/index";
 
-import Home from "./pages/home/Home"
-import Courts from "./pages/courts/Courts"
-import Disputes from "./pages/disputes/Disputes"
-import Dispute from "./pages/dispute/Dispute"
-import Court from "./pages/court/Court";
+import Home from "./pages/Home"
+import Courts from "./pages/Courts"
+import Disputes from "./pages/Disputes"
+import Dispute from "./pages/Dispute"
+import Court from "./pages/Court";
 import Odds from "./pages/Odds";
 import Support from "./pages/Support";
 import Community from "./pages/Community";
@@ -33,7 +33,7 @@ import Stakes from "./pages/Stakes";
 import Arbitrables from "./pages/Arbitrables";
 import {
   BrowserRouter as Router,
-  Link,
+  Link as LinkRouter,
   Route,
   Routes,
 } from "react-router-dom";
@@ -161,7 +161,13 @@ function DashboardContent() {
   return (
     <Router>
       <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{
+          display: 'flex',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+        }}>
           <CssBaseline />
           <AppBar position="absolute" open={open}>
             <Toolbar
@@ -194,7 +200,7 @@ function DashboardContent() {
 
               {/* Support */}
               <Tooltip title="Support">
-                <IconButton color="inherit" size='small' component={Link} to="/support">
+                <IconButton color="inherit" size='small' component={LinkRouter} to="/support">
                   <Favorite />
                 </IconButton>
               </Tooltip>
@@ -240,16 +246,12 @@ function DashboardContent() {
           <Box
             component="main"
             sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
               flexGrow: 1,
               height: '100vh',
               overflow: 'auto',
             }}
           >
-            <Toolbar />
+            <Toolbar/>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/courts" element={<Courts />} />

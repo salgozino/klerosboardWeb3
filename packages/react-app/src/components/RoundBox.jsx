@@ -1,10 +1,10 @@
-import "./roundbox.css"
 import React from 'react'
 import { DataGrid } from "@mui/x-data-grid"
-import {VotesMapping, countVotes} from "../../scripts/utils"
-import { timestamp2Datetime } from "../../scripts/timeUtils"
-import VotesCount from "../votesCount/VotesCount"
-import { Link } from "react-router-dom"
+import {VotesMapping, countVotes} from "../scripts/utils"
+import { timestamp2Datetime } from "../scripts/timeUtils"
+import VotesCount from './VotesCount'
+import { Link as LinkRouter} from "react-router-dom"
+import { Grid, Link } from "@mui/material"
 
 
 
@@ -29,32 +29,30 @@ export default function RoundBox({data}) {
     if (data === undefined || data === null) return null
     
     const votes_col = [
-        { field: 'voteID', headerName: 'Vote ID', width: 100, type: 'string'},
-        { field: 'address', headerName: 'Juror', width: 400, type: 'string', renderCell: (params) => {
-            return (<Link to={"/profile/"+params.row.address}>{params.row.address}</Link>)
+        { field: 'voteID', headerName: 'Vote ID', width: 100, type: 'string', flex:1},
+        { field: 'address', headerName: 'Juror', width: 400, type: 'string', flex:2, renderCell: (params) => {
+            return (<Link component={LinkRouter} to={"/profile/"+params.row.address}>{params.row.address}</Link>)
           }},
-        { field: 'choiceName', headerName: 'Vote', width: 150},
-        { field: 'voteDate', headerName: 'Casting Date', width: 200}
+        { field: 'choiceName', headerName: 'Vote', width: 150, flex:1},
+        { field: 'voteDate', headerName: 'Casting Date', width: 200, flex:1}
     ]
     
     const votes = parseVotes(data.votes)
     const votes_count = countVotes(votes)
     return (
-        <div className="roundBox">
-            <div className="row">
+        <Grid container>
+            <Grid item xs={1} md={12}>
                 <VotesCount votes_count={votes_count} />
-            </div>
-            
-            <div className="row" style={{height: "200px"}}>
-                <div style={{height: '100%', width: '100%'}}>
+            </Grid>
+            <Grid item xs={1} md={12} sx={{height: '300px'}}>
                 <DataGrid
+                    sx={{height: '100%', width: '100%'}}
                     rows={votes}
                     columns={votes_col}
                     pageSize={50}
                     rowsPerPageOptions={[5, 50]}
                     />
-                </div>
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     )
 }

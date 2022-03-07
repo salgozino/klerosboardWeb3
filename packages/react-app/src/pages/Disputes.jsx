@@ -1,12 +1,11 @@
-import "./disputes.css"
 import { useQuery } from "@apollo/client";
-import { ALLDISPUTES } from "../../queries/disputes"
+import { ALLDISPUTES } from "../queries/disputes"
 import { useState } from "react";
-import Table from "../../components/table/Table"
-import { Link } from "react-router-dom";
-import { timestamp2Datetime } from "../../scripts/timeUtils";
-import { getCourtName } from "../../scripts/utils";
-
+import { Link as LinkRouter} from "react-router-dom";
+import { timestamp2Datetime } from "../scripts/timeUtils";
+import { getCourtName } from "../scripts/utils";
+import { Typography, Link } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 
 export default function Disputes() {
   const [disputesData, setDisputesData] = useState(() => []);
@@ -31,7 +30,7 @@ export default function Disputes() {
         {
         'id': dispute.id,
         'subcourtID': dispute.subcourtID.id,
-        'currentRulling': dispute.currentRulling,
+        'currentRulling': dispute.currentRulling ? dispute.currentRulling : 'No Votes',
         'period': dispute.period,
         'lastPeriodChange': timestamp2Datetime(dispute.lastPeriodChange),
         'courtName': courtNames[i]
@@ -49,25 +48,26 @@ export default function Disputes() {
 
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70, type: 'number', renderCell: (params) => {
-      return (<Link to={"/cases/"+params.row.id}>{params.row.id}</Link>)
+    { field: 'id', headerName: 'ID', width: 70, type: 'number', flex:1, renderCell: (params) => {
+      return (<Link component={LinkRouter} to={"/cases/"+params.row.id}>{params.row.id}</Link>)
     }},
-    { field: 'courtName', headerName: 'Court', width: 150, renderCell: (params) => {
-      return (<Link to={"/courts/"+params.row.subcourtID}>{params.row.courtName}</Link>)
+    { field: 'courtName', headerName: 'Court', width: 150, flex:2, renderCell: (params) => {
+      return (<Link component={LinkRouter} to={"/courts/"+params.row.subcourtID}>{params.row.courtName}</Link>)
     }},
-    { field: 'currentRulling', headerName: 'Current Rulling', width: 150, type: 'number'},
+    { field: 'currentRulling', headerName: 'Current Rulling', width: 150, flex:1, type: 'number'},
     { field: 'period', headerName: 'Period', width: 150},
-    { field: 'lastPeriodChange', headerName: 'Last Period change', width: 200}
+    { field: 'lastPeriodChange', headerName: 'Last Period change', width: 200, flex:2}
   ];
   return (
   
-  <div className="disputes">
-      <Table 
-        rows = {disputesData}
-        columns={columns}
-        loading={loading || disputesData === undefined}
-        defaultSort={{ field: 'id', sort: 'desc' }}
-        />
+    <div style={{height:'90%',  width: '100%' }}>
+    <Typography variant="h4" >Disputes Data</Typography>
+    <DataGrid autoPageSize pagination sx={{height:'90%', width:'100%'}}
+      rows = {disputesData}
+      columns={columns}
+      loading={loading && disputesData.length === 0}
+      defaultSort={{ field: 'id', sort: 'desc' }}
+      />
     </div>
   
   )
