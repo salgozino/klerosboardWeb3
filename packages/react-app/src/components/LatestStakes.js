@@ -3,7 +3,7 @@ import { wei2eth } from "../scripts/utils";
 import { Person } from '@mui/icons-material/';
 import { useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
-import { LASTSTAKES } from "../queries/stakes";
+import { LASTSTAKES } from "../graphql/stakes";
 import { Grid, List, ListItem, ListItemAvatar, ListItemText, Skeleton, Avatar, Chip, Typography, Paper, Link } from "@mui/material";
 
 export default function LatestStakes() {

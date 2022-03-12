@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography, Grid, Paper, Chip, Link } from "@mui/material";
 import { useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
-import { LASTDISPUTES } from "../queries/disputes";
+import { LASTDISPUTES } from "../graphql/disputes";
 import { getCourtName } from "../scripts/utils";
 
 

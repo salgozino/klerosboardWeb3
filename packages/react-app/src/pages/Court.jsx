@@ -4,7 +4,7 @@ import InfoCardList from "../components/infoCardList";
 import { sec2DayHour, timestamp2Datetime } from "../scripts/timeUtils";
 import { getCourtName, wei2eth } from "../scripts/utils";
 import { useQuery } from "@apollo/client";
-import { COURTPOLICY, COURT, COURTDISPUTES, JURORSSTAKE } from "../queries/courts";
+import { COURTPOLICY, COURT, COURTDISPUTES, JURORSSTAKE } from "../graphql/courts";
 import { useEffect, useState } from "react";
 import Skeleton from '@mui/material/Skeleton';
 import { Container, Grid, Typography } from "@mui/material";

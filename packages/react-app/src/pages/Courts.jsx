@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { ALLCOURTS } from "../queries/courts"
+import { ALLCOURTS } from "../graphql/courts"
 import { useState } from "react";
 import { getCourtsNames, wei2eth } from "../scripts/utils";
 import { Link as LinkRouter} from "react-router-dom";

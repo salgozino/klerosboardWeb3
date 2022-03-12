@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { ALLDISPUTES } from "../queries/disputes"
+import { ALLDISPUTES } from "../graphql/disputes"
 import { useState } from "react";
 import { Link as LinkRouter} from "react-router-dom";
 import { timestamp2Datetime } from "../scripts/timeUtils";

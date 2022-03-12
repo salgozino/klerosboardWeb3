@@ -3,7 +3,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import InfoCard from '../components/infoCard';
 import { useQuery } from "@apollo/client";
-import { PROFILE, PROFILEVOTES } from "../queries/profiles";
+import { PROFILE, PROFILEVOTES } from "../graphql/profiles";
 import { DataGrid } from '@mui/x-data-grid';
 import { wei2eth } from '../scripts/utils';
 import { timestamp2Datetime } from '../scripts/timeUtils';

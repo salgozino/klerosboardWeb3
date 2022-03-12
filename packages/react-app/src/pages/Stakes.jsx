@@ -4,7 +4,7 @@ import { wei2eth } from "../scripts/utils";
 import { Link as LinkRouter} from "react-router-dom";
 import { Typography, Link, Container } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { ALLSTAKES } from "../queries/stakes";
+import { ALLSTAKES } from "../graphql/stakes";
 import { timestamp2Datetime } from "../scripts/timeUtils";
 
 

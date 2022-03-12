@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { DISPUTE } from "../queries/disputes"
+import { DISPUTE } from "../graphql/disputes"
 import Skeleton from '@mui/material/Skeleton';
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
