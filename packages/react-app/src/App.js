@@ -2,26 +2,15 @@ import { useState, useEffect } from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
-  BrowserRouter as Router,
   Link as LinkRouter,
-  Route,
-  Routes,
+  Outlet,
 } from "react-router-dom";
 
 import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
+import { Box, Toolbar, List, Typography, Divider, IconButton, Badge } from "@mui/material";
 
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Favorite } from "@mui/icons-material";
+import { Favorite, ChevronLeft, Menu, Notifications } from "@mui/icons-material";
 
 import { mainListItems, secondaryListItems } from './components/sideMenuItems';
 
@@ -30,22 +19,6 @@ import { Button } from "./components/index";
 import { Tooltip } from "@material-ui/core";
 import { Avatar } from "@mui/material";
 import ChainMenu from "./components/chainMenu";
-
-import Home from "./pages/Home"
-import Courts from "./pages/Courts"
-import Disputes from "./pages/Disputes"
-import Dispute from "./pages/Dispute"
-import Court from "./pages/Court";
-import Odds from "./pages/Odds";
-import Support from "./pages/Support";
-import Community from "./pages/Community";
-import Stakes from "./pages/Stakes";
-import Arbitrables from "./pages/Arbitrables";
-import Profile from "./pages/Profile";
-import Arbitrable from "./pages/Arbitrable";
-
-
-
 
 
 const drawerWidth = 240;
@@ -155,7 +128,7 @@ function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
   );
 }
 
-function DashboardContent() {
+export default function App() {
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -164,7 +137,6 @@ function DashboardContent() {
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 
   return (
-    <Router>
       <ThemeProvider theme={mdTheme}>
         <Box sx={{
           display: 'flex',
@@ -190,7 +162,7 @@ function DashboardContent() {
                   ...(open && { display: 'none' }),
                 }}
               >
-                <MenuIcon />
+                <Menu />
               </IconButton>
               {/* Klerosboard label */}
               <Typography
@@ -213,7 +185,7 @@ function DashboardContent() {
               {/* Notifications */}
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
+                  <Notifications />
                 </Badge>
               </IconButton>
 
@@ -236,7 +208,7 @@ function DashboardContent() {
               }}
             >
               <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
+                <ChevronLeft />
               </IconButton>
             </Toolbar>
             <Divider />
@@ -248,8 +220,7 @@ function DashboardContent() {
           </Drawer>
 
 
-          <Box
-            component="main"
+          <Box component="main"
             sx={{
               flexGrow: 1,
               height: '100vh',
@@ -257,28 +228,10 @@ function DashboardContent() {
             }}
           >
             <Toolbar/>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/courts" element={<Courts />} />
-              <Route path="/courts/:id" element={<Court />} />
-              <Route path="/cases" element={<Disputes />} />
-              <Route path="/cases/:id" element={<Dispute />} />
-              <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/arbitrables" element={<Arbitrables />} />
-              <Route path="/arbitrables/:id" element={<Arbitrable />} />
-              <Route path="/stakes" element={<Stakes />} />
-              <Route path="/odds" element={<Odds />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/support" element={<Support />} />
-            </Routes>
+            <Outlet />
 
           </Box>
         </Box>
       </ThemeProvider>
-    </Router>
   );
-}
-
-export default function App() {
-  return <DashboardContent />;
-}
+};
