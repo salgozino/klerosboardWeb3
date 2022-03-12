@@ -1,24 +1,22 @@
 import { useState, useEffect } from "react";
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
   Link as LinkRouter,
   Outlet,
 } from "react-router-dom";
 
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import { Box, Toolbar, List, Typography, Divider, IconButton, Badge } from "@mui/material";
-
+import { Box, Toolbar, List, Typography, Divider, IconButton, Badge, Avatar } from "@mui/material";
+import { Tooltip } from "@material-ui/core";
 import { Favorite, ChevronLeft, Menu, Notifications } from "@mui/icons-material";
 
 import { mainListItems, secondaryListItems } from './components/sideMenuItems';
+import { Button } from "./components/index";
+import ChainMenu from "./components/chainMenu";
 
 import useWeb3Modal from "./hooks/useWeb3Modal";
-import { Button } from "./components/index";
-import { Tooltip } from "@material-ui/core";
-import { Avatar } from "@mui/material";
-import ChainMenu from "./components/chainMenu";
 
 
 const drawerWidth = 240;
