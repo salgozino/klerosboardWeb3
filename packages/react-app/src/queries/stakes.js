@@ -10,3 +10,15 @@ query lastStakes {
 	}
 }
 `
+export const ALLSTAKES = gql`
+query allStakes {
+  stakeSets(orderBy:timestamp, orderDirection:desc){
+    address{id}
+    subcourtID,
+    stake,
+    newTotalStake,
+    timestamp,
+    gasCost
+	}
+}
+`
