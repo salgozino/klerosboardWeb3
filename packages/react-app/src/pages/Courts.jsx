@@ -3,7 +3,7 @@ import { ALLCOURTS } from "../queries/courts"
 import { useState } from "react";
 import { getCourtsNames, wei2eth } from "../scripts/utils";
 import { Link as LinkRouter} from "react-router-dom";
-import { Typography, Link } from "@mui/material";
+import { Typography, Link, Container } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 
@@ -43,7 +43,7 @@ export default function Courts() {
 
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70, type: 'number', flex: 1 },
+    { field: 'id', headerName: 'Court Id', width: 70, type: 'number', flex: 1 },
     { field: 'name', headerName: 'Court Name', width: 200, flex: 2, renderCell: (params) => {
       return (<Link component={LinkRouter} to={"/courts/"+params.id}>{params.row.name}</Link>)
     }},
@@ -69,16 +69,20 @@ export default function Courts() {
   ];
 
   return (
-    <div style={{height:'90%',  width: '100%' }}>
+    <Container style={{height:'90%',  width: '100%', marginTop:'20px' }}>
         
     <Typography variant="h4" >Courts Data</Typography>
-    <DataGrid autoPageSize pagination style={{height: '85%'}}
+    <DataGrid autoPageSize pagination style={{height: '90%'}}
       rows = {courtsData}
       columns={columns}
       loading={loading || courtsData.length === 0}
-      defaultSort={{ field: 'id', sort: 'asc' }}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: 'id', sort: 'asc' }],
+        },
+      }}
       />
-    </div>
+    </Container>
 
   )
     

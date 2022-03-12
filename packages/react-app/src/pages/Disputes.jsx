@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link as LinkRouter} from "react-router-dom";
 import { timestamp2Datetime } from "../scripts/timeUtils";
 import { getCourtName } from "../scripts/utils";
-import { Typography, Link } from "@mui/material";
+import { Typography, Link, Container } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function Disputes() {
@@ -60,15 +60,19 @@ export default function Disputes() {
   ];
   return (
   
-    <div style={{height:'90%',  width: '100%' }}>
+    <Container style={{height:'90%',  width: '100%', marginTop:'20px' }}>
     <Typography variant="h4" >Disputes Data</Typography>
     <DataGrid autoPageSize pagination sx={{height:'90%', width:'100%'}}
       rows = {disputesData}
       columns={columns}
       loading={loading && disputesData.length === 0}
-      defaultSort={{ field: 'id', sort: 'desc' }}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: 'id', sort: 'desc' }],
+        },
+      }}
       />
-    </div>
+    </Container>
   
   )
     
