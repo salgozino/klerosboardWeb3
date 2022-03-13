@@ -28,14 +28,12 @@ export default function Dispute() {
 
   var dispute = null
   if (not_loading_and_data) {
-    dispute = data.disputes[0]
+    if (data.disputes.length !== 0){
+      dispute = data.disputes[0]
+    } else {
+      dispute = undefined
+    }
   }
-
-  if (not_loading_and_data) {
-    // console.log(dispute)
-    // console.log(dispute.subcourtID.timePeriods)
-  }
-
   useEffect(() => {
     async function getName(policy) {
       const cn = await getCourtName(policy.policy);
@@ -60,6 +58,12 @@ export default function Dispute() {
   const columnSpacing = 2;
   const rowSpacing = 1;
 
+
+  if (dispute === undefined) {
+    return (
+        <Typography variant='h5'>Error. This case doesn't exist</Typography>
+    )
+}
   return (
     <>
       <Typography variant='h4' sx={{ marginBottom: '15px', marginTop: '20px' }}>General Info</Typography>

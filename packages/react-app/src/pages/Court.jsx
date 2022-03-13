@@ -91,17 +91,28 @@ export default function Court() {
             }
         };
         if (!loading_court && data_court) {
-            if (data_court.courts[0].parent !== null) {
-                const parent = data_court.courts[0].parent;
-                if (parent.policy !== null) {
-                    getParentName(parent.policy.policy);
+            if (data_court.courts.length !== 0){
+                if (data_court.courts[0].parent !== null) {
+                    const parent = data_court.courts[0].parent;
+                    if (parent.policy !== null) {
+                        getParentName(parent.policy.policy);
+                    }
                 }
-            }
+        }
         };
     }, [loading_court, data_court]
     )
     const columnSpacing = 2;
     const rowSpacing = 1;
+
+    if (!loading_court && data_court) {
+        if (data_court.courts.length === 0){
+            console.log("This court doesn't exist")
+        }
+        return (
+            <Typography variant='h5'>Error. This court doesn't exist</Typography>
+        )
+    }
     return (
         <>
 
