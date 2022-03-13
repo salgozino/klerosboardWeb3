@@ -1,14 +1,14 @@
 
-import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
-
+import { Avatar, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 import { Link as LinkRouter} from "react-router-dom";
 import { Link } from '@mui/material';
 import { Feed, Casino, Dashboard, People, Gavel, Balance, Paid } from '@mui/icons-material';
 import { Fragment } from 'react';
+import graphImg from '../images/graphprotocol.png';
+import githubImg from '../images/github.png';
 
 export const mainListItems = (
   <Fragment>
-
     <Link component={LinkRouter} to='/'>
       <ListItemButton>
 
@@ -92,5 +92,31 @@ export const secondaryListItems = (
 
       </ListItemButton>
     </Link>
+  </Fragment>
+);
+
+export const footerListItems = (
+  <Fragment>
+    <ListSubheader component="div" inset>
+      Repositories
+    </ListSubheader>
+
+    <Link href='https://github.com/salgozino/KlerosJurorDashboard' target={'_blank'}>
+      <ListItemButton>
+        <ListItemIcon>
+          <Avatar src={githubImg} alt='Github'/>
+        </ListItemIcon>
+        <ListItemText primary="Github" />
+      </ListItemButton>
+    </Link>
+
+      <Link href='https://thegraph.com/explorer/subgraph/salgozino/klerosboard' target={'_blank'}>
+        <ListItemButton>
+          <ListItemIcon>
+            <Avatar src={graphImg} alt='The Graph' width='40px' height='40px'/>
+          </ListItemIcon>
+          <ListItemText primary="Graph" />
+        </ListItemButton>
+      </Link>
   </Fragment>
 );

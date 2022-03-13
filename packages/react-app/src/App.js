@@ -12,7 +12,7 @@ import { Box, Toolbar, List, Typography, Divider, IconButton, Badge, Avatar } fr
 import { Tooltip } from "@material-ui/core";
 import { Favorite, ChevronLeft, Menu, Notifications } from "@mui/icons-material";
 
-import { mainListItems, secondaryListItems } from './components/sideMenuItems';
+import { mainListItems, secondaryListItems, footerListItems } from './components/sideMenuItems';
 import { Button } from "./components/index";
 import ChainMenu from "./components/chainMenu";
 
@@ -215,6 +215,8 @@ export default function App() {
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
+            <Divider sx={{my: 'auto '}}/>
+            {footerListItems}
           </List>
         </Drawer>
 
