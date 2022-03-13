@@ -8,7 +8,7 @@ import { getCourtName, capitalizeFirstLetter, period2index, VotesMapping, countU
 import { timestamp2Datetime, sec2DayHour } from "../scripts/timeUtils";
 import RoundBox from "../components/RoundBox";
 import VotesCount from "../components/VotesCount";
-import { Container, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 
 function remainingTime(lastPeriodChange, period, court_periods) {
@@ -61,7 +61,7 @@ export default function Dispute() {
   const rowSpacing = 1;
 
   return (
-    <Container>
+    <>
       <Typography variant='h4' sx={{ marginBottom: '15px', marginTop: '20px' }}>General Info</Typography>
       <Grid container columnSpacing={columnSpacing} rowSpacing={rowSpacing}>
         <Grid item xs={1} md={2}>
@@ -165,7 +165,7 @@ export default function Dispute() {
       <Typography variant="h5">Rounds info</Typography>
       {rounds_boxs}
 
-    </Container>
+    </>
 
   )
 

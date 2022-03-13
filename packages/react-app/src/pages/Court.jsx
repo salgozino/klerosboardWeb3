@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { COURTPOLICY, COURT, COURTDISPUTES, JURORSSTAKE } from "../graphql/courts";
 import { useEffect, useState } from "react";
 import Skeleton from '@mui/material/Skeleton';
-import { Container, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 
@@ -103,7 +103,7 @@ export default function Court() {
     const columnSpacing = 2;
     const rowSpacing = 1;
     return (
-        <Container>
+        <>
 
             <Typography variant='h4' sx={{ marginBottom: '15px', width:'80%'}}>
                 Court {id}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%' fitContent/>}
@@ -217,6 +217,6 @@ export default function Court() {
                     />
                 </Grid>
             </Grid>
-        </Container>
+        </>
     )
 }

@@ -19,6 +19,8 @@ import Stakes from "./pages/Stakes";
 import Arbitrables from "./pages/Arbitrables";
 import Profile from "./pages/Profile";
 import Arbitrable from "./pages/Arbitrable";
+import NestedLayout from './pages/NestedLayout';
+import NotFound from './pages/NotFound';
 
 
 const client = new ApolloClient({
@@ -34,17 +36,24 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="/courts" element={<Courts />} />
-          <Route path="/courts/:id" element={<Court />} />
-          <Route path="/cases" element={<Disputes />} />
-          <Route path="/cases/:id" element={<Dispute />} />
+          <Route path='/courts' element={<NestedLayout />}>
+            <Route index element={<Courts />} />
+            <Route path=":id" element={<Court />} />
+          </Route>
+          <Route path='/cases' element={<NestedLayout />}>
+            <Route index element={<Disputes />} />
+            <Route path=":id" element={<Dispute />} />
+          </Route>
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/arbitrables" element={<Arbitrables />} />
-          <Route path="/arbitrables/:id" element={<Arbitrable />} />
+          <Route path="/arbitrables" element={<NestedLayout />}>
+            <Route index element={<Arbitrables />} />
+            <Route path=":id" element={<Arbitrable />} />
+          </Route>
           <Route path="/stakes" element={<Stakes />} />
           <Route path="/odds" element={<Odds />} />
           <Route path="/community" element={<Community />} />
           <Route path="/support" element={<Support />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </ApolloProvider>

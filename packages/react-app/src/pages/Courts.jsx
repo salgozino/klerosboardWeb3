@@ -45,7 +45,7 @@ export default function Courts() {
   const columns = [
     { field: 'id', headerName: 'Court Id', width: 70, type: 'number', flex: 1 },
     { field: 'name', headerName: 'Court Name', width: 200, flex: 2, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={"/courts/"+params.id}>{params.row.name}</Link>)
+      return (<Link component={LinkRouter} to={params.id}>{params.row.name}</Link>)
     }},
     { field: 'tokenStaked', headerName: 'Total Staked', width: 150, type: 'number', flex: 1, valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });

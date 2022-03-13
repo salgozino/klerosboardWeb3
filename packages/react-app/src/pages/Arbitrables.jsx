@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { wei2eth } from "../scripts/utils";
 import { Link as LinkRouter} from "react-router-dom";
-import { Typography, Link, Container } from "@mui/material";
+import { Typography, Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 import { ALLARBITRABLES } from "../graphql/arbitrables";
@@ -36,7 +36,7 @@ export default function Arbitrables() {
 
   const columns = [
     { field: 'id', headerName: 'Arbitrable', flex: 3, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={"/arbitrables/"+params.value}>{params.value}</Link>)
+      return (<Link component={LinkRouter} to={params.value}>{params.value}</Link>)
     }},
     { field: 'name', headerName: 'Name', flex: 1},
     { field: 'disputesCount', headerName: 'Disputes Created', type: 'number', flex: 1},
@@ -44,8 +44,7 @@ export default function Arbitrables() {
   ];
 
   return (
-    <Container style={{height:'90%',  width: '100%', marginTop:'20px' }}>
-        
+    <>
     <Typography variant="h4" >Arbitrables Data</Typography>
     <DataGrid autoPageSize pagination style={{height: '90%'}}
       rows = {arbitrablesData}
@@ -57,7 +56,6 @@ export default function Arbitrables() {
         },
       }}
       />
-    </Container>
-
+    </>
   )
 }

@@ -1,4 +1,4 @@
-import { Container, Grid, Link, Typography } from '@mui/material';
+import { Grid, Link, Typography } from '@mui/material';
 import { Link as LinkRouter } from 'react-router-dom';
 import React from 'react'
 import { useQuery } from "@apollo/client";
@@ -39,8 +39,7 @@ export default function Arbitrable() {
   ]
 
   return (
-    <Container style={{ height: '90%', width: '100%', marginTop: '20px' }}>
-
+    <>
       <Typography variant='h4'>Arbitrable: {id}</Typography>
       <Link href={"https://www.etherscan.com/address/" + id} target={'_blank'}>View on block explorer</Link>
 
@@ -133,6 +132,6 @@ export default function Arbitrable() {
         }}
       />
 
-    </Container>
+    </>
   )
 }

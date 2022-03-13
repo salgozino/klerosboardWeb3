@@ -49,7 +49,7 @@ export default function Disputes() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70, type: 'number', flex:1, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={"/cases/"+params.row.id}>{params.row.id}</Link>)
+      return (<Link component={LinkRouter} to={params.row.id}>{params.row.id}</Link>)
     }},
     { field: 'courtName', headerName: 'Court', width: 150, flex:2, renderCell: (params) => {
       return (<Link component={LinkRouter} to={"/courts/"+params.row.subcourtID}>{params.row.courtName}</Link>)
@@ -59,8 +59,7 @@ export default function Disputes() {
     { field: 'lastPeriodChange', headerName: 'Last Period change', width: 200, flex:2}
   ];
   return (
-  
-    <Container style={{height:'90%',  width: '100%', marginTop:'20px' }}>
+    <>
     <Typography variant="h4" >Disputes Data</Typography>
     <DataGrid autoPageSize pagination sx={{height:'90%', width:'100%'}}
       rows = {disputesData}
@@ -72,8 +71,7 @@ export default function Disputes() {
         },
       }}
       />
-    </Container>
-  
+  </>
   )
     
 }
