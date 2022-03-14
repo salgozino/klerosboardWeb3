@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link as LinkRouter} from "react-router-dom";
 import { timestamp2Datetime } from "../scripts/timeUtils";
 import { getCourtName } from "../scripts/utils";
-import { Typography, Link, Container } from "@mui/material";
+import { Typography, Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function Disputes() {

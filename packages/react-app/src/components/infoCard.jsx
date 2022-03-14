@@ -1,9 +1,8 @@
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material"
-import Skeleton from '@mui/material/Skeleton';
+import { Card, CardContent, Link, Skeleton, Typography } from "@mui/material";
 import { Link as LinkRouter} from "react-router-dom";
 
-import { Card, CardContent } from "@material-ui/core";
-import { Link, Typography } from "@mui/material";
+
 
 
 export default function InfoCard({ info, loading, baseURL }) {
