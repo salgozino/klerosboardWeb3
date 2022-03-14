@@ -15,11 +15,10 @@ function parseVotes(votes){
             'address': vote.address.id,
             'choice': vote.choice,
             'choiceName': !vote.voted ? 'Pending': VotesMapping[vote.choice],
-            'voteID': vote.voteID,
+            'id': vote.voteID,
             'voted': vote.voted,
             'timestamp': vote.timestamp,
             'voteDate': vote.timestamp ? timestamp2Datetime(vote.timestamp/1000) : '-',
-            'id': vote.voteID
         })
     })
     return newVotes
@@ -29,7 +28,7 @@ export default function RoundBox({data}) {
     if (data === undefined || data === null) return null
     
     const votes_col = [
-        { field: 'voteID', headerName: 'Vote ID', width: 100, type: 'string', flex:1},
+        { field: 'id', headerName: 'Vote ID', width: 100, type: 'string', flex:1},
         { field: 'address', headerName: 'Juror', width: 400, type: 'string', flex:2, renderCell: (params) => {
             return (<Link component={LinkRouter} to={"/profile/"+params.row.address}>{params.row.address}</Link>)
           }},
@@ -44,7 +43,7 @@ export default function RoundBox({data}) {
             <Grid item xs={1} md={12}>
                 <VotesCount votes_count={votes_count} />
             </Grid>
-            <Grid item xs={1} md={12} sx={{height: '300px'}}>
+            <Grid item xs={1} md={12} sx={{height: '300px', marginTop: '20px'}}>
                 <DataGrid
                     sx={{height: '100%', width: '100%'}}
                     rows={votes}
