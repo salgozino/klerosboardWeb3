@@ -77,7 +77,7 @@ export default function Court() {
                 setCourtName(cn);
             }
         };
-        if (!loading_policy && court_policy) {
+        if (!loading_policy && court_policy.courts.length !== 0) {
             getName(court_policy)
         };
     }, [court_policy, loading_policy]
@@ -107,7 +107,7 @@ export default function Court() {
 
     if (!loading_court && data_court) {
         if (data_court.courts.length === 0){
-            console.log("This court doesn't exist")
+            console.log("The court " + id + " doesn't exist")
         return (
             <Typography variant='h5'>Error. This court doesn't exist</Typography>
         )
