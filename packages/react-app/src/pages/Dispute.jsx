@@ -48,9 +48,9 @@ export default function Dispute() {
   )
 
   const rounds_boxs = dispute ? dispute.rounds.map((round, i) => {
-    return (<div>
+    return (<div key={i}>
       <Typography variant="h5" sx={{ "margin": "20px 0px" }}>Round {i}</Typography>
-      <RoundBox data={round} />
+      <RoundBox data={round}/>
     </div>)
   }) : <Skeleton variant="rectangular" height={200} />
 
@@ -66,7 +66,7 @@ export default function Dispute() {
 }
   return (
     <>
-      <Typography variant='h4' sx={{ marginBottom: '15px', marginTop: '20px' }}>General Info</Typography>
+      <Typography variant='h4' sx={{ marginBottom: '15px', marginTop: '20px' }}>Case: {id}</Typography>
       <Grid container columnSpacing={columnSpacing} rowSpacing={rowSpacing}>
         <Grid item xs={1} md={2}>
           <InfoCard
@@ -162,9 +162,7 @@ export default function Dispute() {
       </Grid>
 
       <Typography variant="h5">Unique Votes in all the Rounds</Typography>
-      <div className="row">
-        {allUniqueVotes}
-      </div>
+      {allUniqueVotes}
 
       <Typography variant="h5">Rounds info</Typography>
       {rounds_boxs}
