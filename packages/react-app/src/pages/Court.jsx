@@ -108,16 +108,16 @@ export default function Court() {
     if (!loading_court && data_court) {
         if (data_court.courts.length === 0){
             console.log("This court doesn't exist")
-        }
         return (
             <Typography variant='h5'>Error. This court doesn't exist</Typography>
         )
+        }
     }
     return (
         <>
 
             <Typography variant='h4' sx={{ marginBottom: '15px', width:'80%'}}>
-                Court {id}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%' fitContent/>}
+                Court {id}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%'/>}
             </Typography>
             
             {/* First Line */}
