@@ -2,8 +2,22 @@ import { useState, useEffect } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import {
   Link as LinkRouter,
-  Outlet,
+  useRoutes,
 } from "react-router-dom";
+import Home from "./pages/Home"
+import Courts from "./pages/Courts"
+import Disputes from "./pages/Disputes"
+import Dispute from "./pages/Dispute"
+import Court from "./pages/Court";
+import Odds from "./pages/Odds";
+import Support from "./pages/Support";
+import Community from "./pages/Community";
+import Stakes from "./pages/Stakes";
+import Arbitrables from "./pages/Arbitrables";
+import Profile from "./pages/Profile";
+import Arbitrable from "./pages/Arbitrable";
+import NestedLayout from './pages/NestedLayout';
+import NotFound from './pages/NotFound';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
@@ -126,17 +140,47 @@ function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
   );
 }
 
+const routes = [
+  { path: "/", element: <Home /> },
+  {
+    path: "/courts", element: <NestedLayout />, children: [
+      { index: true, element: <Courts /> },
+      { path: ":id", element: <Court /> },
+    ]
+  },
+  {
+    path: "/cases", element: <NestedLayout />, children: [
+      { index: true, element: <Disputes /> },
+      { path: ":id", element: <Dispute /> },
+    ]
+  },
+  { path: "/profile/:id", element: <Profile /> },
+  {
+    path: "/arbitrables", element: <NestedLayout />, children: [
+      { index: true, element: <Arbitrables /> },
+      { path: ":id", element: <Arbitrable /> },
+    ]
+  },
+  { path: "/stakes", element: <Stakes /> },
+  { path: "/odds", element: <Odds /> },
+  { path: "/community", element: <Community /> },
+  { path: "/support", element: <Support /> },
+  { path: "/*", element: <NotFound /> },
+];
+
+
 export default function App() {
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  let element = useRoutes(routes)
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 
   return (
     <ThemeProvider theme={mdTheme}>
-    
+
       <Box sx={{
         display: 'flex',
         backgroundColor: (theme) =>
@@ -234,7 +278,7 @@ export default function App() {
           }}
         >
           <Toolbar />
-          <Outlet />
+          {element}
 
         </Box>
       </Box>
