@@ -1,15 +1,19 @@
 import { useQuery } from "@apollo/client";
 import { ALLCOURTS } from "../graphql/courts"
 import { useState } from "react";
-import { getCourtsNames, wei2eth } from "../scripts/utils";
+import { getChainId, getCourtsNames, wei2eth } from "../scripts/utils";
 import { LinkWithQuery as LinkRouter } from "../components/LinkWithQuery";
 import { Typography, Link, Container } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useSearchParams } from "react-router-dom";
 
 
 export default function Courts() {
   const [courtsData, setCourtsData] = useState(() => []);
- 
+  let [searchParams] = useSearchParams();
+  let chainId = getChainId(searchParams);
+  const rewardCurrency = chainId === 'xdai' ? 'xDAI' : 'ETH'
+
   const handleCourtData = (data) => {
     parseCourtData(data.courts);
   }
@@ -54,7 +58,7 @@ export default function Courts() {
     { field: 'activeJurors', headerName: 'Active Jurors', width: 150, type: 'number', flex: 1},
     { field: 'feeForJuror', headerName: 'Fee for Jurors', width: 150, type: 'number', flex: 1, valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString();
-      return `${valueFormatted} ETH`;
+      return `${valueFormatted} ${rewardCurrency}`;
     }},
     { field: 'minStake', headerName: 'Min Stake', width: 150, type: 'number', flex: 1, valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString();

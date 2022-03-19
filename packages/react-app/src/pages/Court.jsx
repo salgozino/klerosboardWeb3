@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import InfoCard from "../components/infoCard";
 import InfoCardList from "../components/infoCardList";
 import { sec2DayHour, timestamp2Datetime } from "../scripts/timeUtils";
-import { getCourtName, wei2eth } from "../scripts/utils";
+import { getChainId, getCourtName, wei2eth } from "../scripts/utils";
 import { useQuery } from "@apollo/client";
 import { COURTPOLICY, COURT, COURTDISPUTES, JURORSSTAKE } from "../graphql/courts";
 import { useEffect, useState } from "react";
@@ -36,6 +36,9 @@ export default function Court() {
     const { id } = useParams();
     const [courtName, setCourtName] = useState(null);
     const [parentCourtName, setParentCourtName] = useState(null);
+    let [searchParams] = useSearchParams();
+    let chainId = getChainId(searchParams);
+    const rewardCurrency = chainId === 'xdai' ? 'xDAI' : 'ETH'
 
     const jurors_cols = [
         { field: 'id', headerName: 'Juror', width: 400, type: 'string', flex: 2 },
@@ -178,7 +181,7 @@ export default function Court() {
                     <InfoCard loading={loading_court} info={{ 'title': 'Vote Stake', 'value': loading_court ? null : (wei2eth(data_court.courts[0].minStake) * Number(data_court.courts[0].alpha) / 10000).toFixed(0) + ' PNK' }} />
                 </Grid>
                 <Grid item xs={12} md={4} zeroMinWidth>
-                    <InfoCard loading={loading_court} info={{ 'title': 'Vote Reward', 'value': loading_court ? null : wei2eth(data_court.courts[0].feeForJuror).toFixed(2) + ' ETH' }} />
+                    <InfoCard loading={loading_court} info={{ 'title': 'Vote Reward', 'value': loading_court ? null : wei2eth(data_court.courts[0].feeForJuror).toFixed(2) + ' ' + rewardCurrency }} />
                 </Grid>
 
                 {/* Fourth Line */}
