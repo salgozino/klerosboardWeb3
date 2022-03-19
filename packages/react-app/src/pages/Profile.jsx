@@ -78,8 +78,14 @@ export default function Profile() {
 
   const all_stakes_cols = [
     { field: 'court', headerName: 'Court', type: 'string', flex: 2 },
-    { field: 'stake', headerName: 'Stake', flex: 1 },
-    { field: 'newTotalStake', headerName: 'Total in all courts', flex: 1 },
+    { field: 'stake', headerName: 'Stake', flex: 1, valueFormatter: (params) => {
+      const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });
+      return `${valueFormatted}`;
+    }},
+    { field: 'newTotalStake', headerName: 'Total in all courts', flex: 1, valueFormatter: (params) => {
+      const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });
+      return `${valueFormatted}`;
+    }},
     { field: 'timestamp', headerName: 'Date', flex: 1 }
   ]
 
@@ -90,8 +96,8 @@ export default function Profile() {
     { field: 'txid', headerName: 'TxID', flex: 2 }
   ]
 
-  const { error: error_profile, data: data_profile, loading: loading_profile } = useQuery(PROFILE, { variables: { profileid: id } });
-  const { error: error_profilevotes, data: data_profilevotes, loading: loading_profilevotes } = useQuery(PROFILEVOTES, { variables: { profileid: id } });
+  const { error: error_profile, data: data_profile, loading: loading_profile } = useQuery(PROFILE, { variables: { profileid: id.toLowerCase() } });
+  const { error: error_profilevotes, data: data_profilevotes, loading: loading_profilevotes } = useQuery(PROFILEVOTES, { variables: { profileid: id.toLowerCase() } });
   if (error_profile) { console.log(error_profile) };
   if (error_profilevotes) { console.log(error_profilevotes) };
   console.log(data_profilevotes)
