@@ -104,7 +104,7 @@ export const footerListItems = (
     <Link href='https://github.com/salgozino/KlerosJurorDashboard' target={'_blank'}>
       <ListItemButton>
         <ListItemIcon>
-          <Avatar src={githubImg} alt='Github'/>
+          <Avatar src={githubImg} alt='Github' sx={{width: '20px', height: '20px'}}/>
         </ListItemIcon>
         <ListItemText primary="Github" />
       </ListItemButton>
@@ -113,7 +113,7 @@ export const footerListItems = (
       <Link href='https://thegraph.com/explorer/subgraph/salgozino/klerosboard' target={'_blank'}>
         <ListItemButton>
           <ListItemIcon>
-            <Avatar src={graphImg} alt='The Graph' width='40px' height='40px'/>
+            <Avatar src={graphImg} alt='The Graph' sx={{width: '20px', height: '20px'}}/>
           </ListItemIcon>
           <ListItemText primary="Graph" />
         </ListItemButton>

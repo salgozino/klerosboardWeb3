@@ -215,7 +215,12 @@ export default function App() {
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
-            <Divider sx={{my: 'auto '}}/>
+          </List>
+
+          <List component="nav" sx={{
+            marginTop: 'auto'
+          }}>
+            <Divider />
             {footerListItems}
           </List>
         </Drawer>
