@@ -45,7 +45,7 @@ export function getChainId(searchParams){
     if (chainId !== 'xdai'){
         return 'mainnet'
     } 
-    return chainId
+    return chainId.toLowerCase();
 }
 
 
