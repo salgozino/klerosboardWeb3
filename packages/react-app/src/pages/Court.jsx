@@ -122,7 +122,7 @@ export default function Court() {
             
             {/* First Line */}
             <Grid container columnSpacing={columnSpacing} rowSpacing={rowSpacing}>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCard
                         loading={loading_court && parentCourtName === null}
                         baseURL={data_court ? data_court.courts[0].parent ? "/courts" : null : null}
@@ -134,7 +134,7 @@ export default function Court() {
                             }
                         } />
                 </Grid>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCardList
                         loading={loading_court}
                         baseURL={data_court ? data_court.courts[0].childs.length > 0 ? "/courts" : null : null}
@@ -145,7 +145,7 @@ export default function Court() {
                             }
                         } />
                 </Grid>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCardList
                         loading={loading_court}
                         info={
@@ -155,50 +155,50 @@ export default function Court() {
                             }
                         } />
                 </Grid>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Jurors for Court Jump', 'value': loading_court ? null : data_court.courts[0].jurorsForCourtJump }} />
                 </Grid>
 
                 {/* Second Line */}
-                <Grid item xs={1} md={4} zeroMinWidth>
+                <Grid item xs={12} md={4} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Total Disputes', 'value': loading_court ? null : data_court.courts[0].disputesNum }} />
                 </Grid>
-                <Grid item xs={1} md={4} zeroMinWidth>
+                <Grid item xs={12} md={4} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Ongoing Disputes', 'value': loading_court ? null : data_court.courts[0].disputesOngoing }} />
                 </Grid>
-                <Grid item xs={1} md={4} zeroMinWidth>
+                <Grid item xs={12} md={4} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Ruled Disputes', 'value': loading_court ? null : data_court.courts[0].disputesClosed }} />
                 </Grid>
 
                 {/* Third Line */}
-                <Grid item xs={1} md={4} zeroMinWidth>
+                <Grid item xs={12} md={4} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Min Stake', 'value': loading_court ? null : wei2eth(data_court.courts[0].minStake).toFixed(0) + ' PNK' }} />
                 </Grid>
-                <Grid item xs={1} md={4} zeroMinWidth>
+                <Grid item xs={12} md={4} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Vote Stake', 'value': loading_court ? null : (wei2eth(data_court.courts[0].minStake) * Number(data_court.courts[0].alpha) / 10000).toFixed(0) + ' PNK' }} />
                 </Grid>
-                <Grid item xs={1} md={4} zeroMinWidth>
+                <Grid item xs={12} md={4} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Vote Reward', 'value': loading_court ? null : wei2eth(data_court.courts[0].feeForJuror).toFixed(2) + ' ETH' }} />
                 </Grid>
 
                 {/* Fourth Line */}
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Active Jurors of this court', 'value': loading_court ? null : data_court.courts[0].activeJurors }} />
                 </Grid>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Active Jurors with subcourts', 'value': loading_court ? null : data_court.courts[0].activeJurors }} />
                 </Grid>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Token Staked in this court', 'value': loading_court ? null : wei2eth(data_court.courts[0].tokenStaked).toFixed(0) }} />
                 </Grid>
-                <Grid item xs={1} md={3} zeroMinWidth>
+                <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCard loading={loading_court} info={{ 'title': 'Token Staked with subcourts', 'value': loading_court ? null : wei2eth(data_court.courts[0].tokenStaked).toFixed(0) }} />
                 </Grid>
 
             </Grid>
 
             <Grid container spacing={2}>
-                <Grid item xs={1} md={6} zeroMinWidth>
+                <Grid item xs={12} md={6} zeroMinWidth>
                     <Typography variant='h5'>Jurors</Typography>
                     <DataGrid pagination
                         columns={jurors_cols}
@@ -213,7 +213,7 @@ export default function Court() {
                     />
                 </Grid>
 
-                <Grid item xs={1} md={6} zeroMinWidth>
+                <Grid item xs={12} md={6} zeroMinWidth>
                     <Typography variant='h5'>Disputes</Typography>
                     <DataGrid pagination
                         columns={dispute_cols}

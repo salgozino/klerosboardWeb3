@@ -68,7 +68,7 @@ export default function Dispute() {
     <>
       <Typography variant='h4' sx={{ marginBottom: '15px', marginTop: '20px' }}>Case: {id}</Typography>
       <Grid container columnSpacing={columnSpacing} rowSpacing={rowSpacing}>
-        <Grid item xs={1} md={2}>
+        <Grid item xs={12} md={2}>
           <InfoCard
             loading={!not_loading_and_data}
             baseURL='/courts'
@@ -82,7 +82,7 @@ export default function Dispute() {
             }
           />
         </Grid>
-        <Grid item xs={1} md={2}>
+        <Grid item xs={12} md={2}>
           <InfoCard
             loading={loading}
             info={
@@ -92,7 +92,7 @@ export default function Dispute() {
               }
             } />
         </Grid>
-        <Grid item xs={1} md={2}>
+        <Grid item xs={12} md={2}>
           <InfoCard
             loading={loading}
             info={
@@ -102,7 +102,7 @@ export default function Dispute() {
               }
             } />
         </Grid>
-        <Grid item xs={1} md={2}>
+        <Grid item xs={12} md={2}>
           <InfoCard
             loading={loading}
             info={
@@ -112,7 +112,7 @@ export default function Dispute() {
               }
             } />
         </Grid>
-        <Grid item xs={1} md={2}>
+        <Grid item xs={12} md={2}>
           <InfoCard
             loading={loading}
             info={
@@ -122,7 +122,7 @@ export default function Dispute() {
               }
             } />
         </Grid>
-        <Grid item xs={1} md={2}>
+        <Grid item xs={12} md={2}>
           <InfoCard
             loading={loading}
             info={
