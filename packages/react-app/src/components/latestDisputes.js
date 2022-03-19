@@ -57,7 +57,7 @@ export default function LatestDisputes() {
     setdisputesTableRows(tableRows)
   }
 
-  const { error, foo, loading } = useQuery(LASTDISPUTES, { onCompleted: handleDisputesData });
+  const { error } = useQuery(LASTDISPUTES, { onCompleted: handleDisputesData });
 
   if (error) {console.log(error)};
 

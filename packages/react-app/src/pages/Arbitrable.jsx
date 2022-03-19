@@ -11,8 +11,8 @@ import { timestamp2Datetime } from '../scripts/timeUtils';
 
 export default function Arbitrable() {
   const { id } = useParams();
-  const { error, data, loading } = useQuery(ARBITRABLE, { variables: { arbitrableId: id } });
-  const { error: error_disputes, data: data_disputes, loading: loading_disputes } = useQuery(ARBITRABLEDISPUTES, { variables: { arbitrableId: id } });
+  const { data } = useQuery(ARBITRABLE, { variables: { arbitrableId: id } });
+  const { data: data_disputes, loading: loading_disputes } = useQuery(ARBITRABLEDISPUTES, { variables: { arbitrableId: id } });
 
   const dispute_cols = [
     {

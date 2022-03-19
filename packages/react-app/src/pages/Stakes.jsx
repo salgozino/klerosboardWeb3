@@ -32,7 +32,7 @@ export default function Stakes() {
     setStakesData(newStakesData)
   }
 
-  const {error, foo, loading} = useQuery(ALLSTAKES, {onCompleted: handleStakesData});
+  const {error, loading} = useQuery(ALLSTAKES, {onCompleted: handleStakesData});
   if (error) return <span>Upsss, an error has raised</span>
 
 

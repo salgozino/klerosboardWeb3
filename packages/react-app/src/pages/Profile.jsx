@@ -76,13 +76,6 @@ export default function Profile() {
     { field: 'currentRulling', headerName: 'Rulling', flex: 1 }
   ]
 
-  const court_stakes_cols = [
-    { field: 'court', headerName: 'Court', type: 'string', flex: 2 },
-    { field: 'stake', headerName: 'Staked', flex: 1 },
-    { field: 'timestamp', headerName: 'Last Stake Date', flex: 1 },
-    { field: 'txid', headerName: 'TxID', flex: 1 }
-  ]
-
   const all_stakes_cols = [
     { field: 'court', headerName: 'Court', type: 'string', flex: 2 },
     { field: 'stake', headerName: 'Stake', flex: 1 },

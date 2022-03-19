@@ -56,7 +56,7 @@ export default function LatestStakes() {
     setStakeItems(items)
   }
 
-  const { error, foo, loading } = useQuery(LASTSTAKES, { onCompleted: handleStakeData });
+  const { error } = useQuery(LASTSTAKES, { onCompleted: handleStakeData });
 
   if (error) { console.log(error) }
   return (

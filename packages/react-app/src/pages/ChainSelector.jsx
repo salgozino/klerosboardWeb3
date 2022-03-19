@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, CardActions, Container, Grid, Typography, Button } from '@mui/material'
+import { Card, CardContent, CardMedia, CardActions, Container, Grid, Button } from '@mui/material'
 import { Link as LinkRouter } from 'react-router-dom';
 import React from 'react'
 

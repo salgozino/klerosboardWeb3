@@ -30,7 +30,7 @@ export default function Arbitrables() {
     setArbitrablesData(newArbitrableData)
   }
 
-  const {error, foo, loading} = useQuery(ALLARBITRABLES, {onCompleted: handleArbitrableData});
+  const {error, loading} = useQuery(ALLARBITRABLES, {onCompleted: handleArbitrableData});
   if (error) return <span>Upsss, an error has raised</span>
 
 
