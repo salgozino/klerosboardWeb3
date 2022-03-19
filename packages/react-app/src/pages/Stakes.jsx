@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { wei2eth } from "../scripts/utils";
-import { Link as LinkRouter} from "react-router-dom";
+import {LinkWithQuery as LinkRouter} from "../components/LinkWithQuery";
 import { Typography, Link, Container } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { ALLSTAKES } from "../graphql/stakes";
@@ -39,10 +39,10 @@ export default function Stakes() {
   const columns = [
     { field: 'id', headerName: 'ID', hide: true},
     { field: 'juror', headerName: 'Juror', type: 'string', flex: 3, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={"/profile/"+params.value}>{params.value}</Link>)
+      return (<Link component={LinkRouter} to={"/profile/"+params.value} children={params.value}/>)
     }},
     { field: 'courtName', headerName: 'Court', flex: 1, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={"/courts/"+params.subcourtId}>{params.row.subcourtId}</Link>)
+      return (<Link component={LinkRouter} to={"/courts/"+params.row.subcourtId} children={params.row.subcourtId} />)
     }},
     { field: 'stake', headerName: 'Stake', type: 'number', flex: 1, valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });

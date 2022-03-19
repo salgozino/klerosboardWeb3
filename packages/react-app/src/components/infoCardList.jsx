@@ -1,5 +1,5 @@
 import { Card, CardContent, List, ListItem, ListItemText, Skeleton, Typography, Link } from "@mui/material";
-import { Link as LinkRouter} from "react-router-dom";
+import { LinkWithQuery as LinkRouter } from "./LinkWithQuery";
 
 export default function InfoCardList({ info, loading, baseURL }) {
 
@@ -20,7 +20,7 @@ export default function InfoCardList({ info, loading, baseURL }) {
                 <ListItem key={i}>
                   <ListItemText
                     primary={baseURL ?
-                      <Link component={LinkRouter} to={baseURL + '/' + item}>{item}</Link>
+                      <Link component={LinkRouter} to={baseURL + '/' + item} children={item} />
                       : item
                     }
                   />

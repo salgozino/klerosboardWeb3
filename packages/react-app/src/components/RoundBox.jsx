@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import {VotesMapping, countVotes} from "../scripts/utils"
 import { timestamp2Datetime } from "../scripts/timeUtils"
 import VotesCount from './VotesCount'
-import { Link as LinkRouter} from "react-router-dom"
+import { LinkWithQuery as LinkRouter} from '../components/LinkWithQuery';
 import { Grid, Link } from "@mui/material"
 
 
@@ -30,7 +30,7 @@ export default function RoundBox({data}) {
     const votes_col = [
         { field: 'id', headerName: 'Vote ID', width: 100, type: 'string', flex:1},
         { field: 'address', headerName: 'Juror', width: 400, type: 'string', flex:2, renderCell: (params) => {
-            return (<Link component={LinkRouter} to={"/profile/"+params.row.address}>{params.row.address}</Link>)
+            return (<Link component={LinkRouter} to={"/profile/"+params.row.address} children={params.row.address} />)
           }},
         { field: 'choiceName', headerName: 'Vote', width: 150, flex:1},
         { field: 'voteDate', headerName: 'Casting Date', width: 200, flex:1}

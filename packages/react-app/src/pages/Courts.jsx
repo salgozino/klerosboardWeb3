@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { ALLCOURTS } from "../graphql/courts"
 import { useState } from "react";
 import { getCourtsNames, wei2eth } from "../scripts/utils";
-import { Link as LinkRouter} from "react-router-dom";
+import { LinkWithQuery as LinkRouter } from "../components/LinkWithQuery";
 import { Typography, Link, Container } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -45,7 +45,7 @@ export default function Courts() {
   const columns = [
     { field: 'id', headerName: 'Court Id', width: 70, type: 'number', flex: 1 },
     { field: 'name', headerName: 'Court Name', width: 200, flex: 2, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={params.id}>{params.row.name}</Link>)
+      return (<Link component={LinkRouter} to={params.id} children={params.row.name} />)
     }},
     { field: 'tokenStaked', headerName: 'Total Staked', width: 150, type: 'number', flex: 1, valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });

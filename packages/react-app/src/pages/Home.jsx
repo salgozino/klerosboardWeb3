@@ -3,8 +3,9 @@ import LatestDisputes from "../components/latestDisputes";
 import InfoCard from "../components/infoCard";
 import { Container, Grid, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
-import { wei2eth } from "../scripts/utils";
+import { getChainId, wei2eth } from "../scripts/utils";
 import { KLEROSCOUNTERS } from "../graphql/klerosCounters";
+import { useSearchParams } from "react-router-dom";
 
 
 function getAPY(totalStaked, chainId) {
@@ -15,13 +16,15 @@ function getAPY(totalStaked, chainId) {
 
 export default function Home() {
   const { error, data, loading } = useQuery(KLEROSCOUNTERS);
-  if (data) console.log(data);
+  let [searchParams] = useSearchParams();
+  let chainId = getChainId(searchParams)
+
   if (error) console.log(error);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Typography variant='h4' sx={{ marginBottom: '15px', width: '80%' }}>
-        Dashboard
+        Dashboard: {chainId}
       </Typography>
 
       <Grid container columnSpacing={2} rowSpacing={1} sx={{ marginTop: '30px' }}>

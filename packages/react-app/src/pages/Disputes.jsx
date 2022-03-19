@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { ALLDISPUTES } from "../graphql/disputes"
 import { useState } from "react";
-import { Link as LinkRouter} from "react-router-dom";
+import { LinkWithQuery as LinkRouter } from "../components/LinkWithQuery";
 import { timestamp2Datetime } from "../scripts/timeUtils";
 import { getCourtName } from "../scripts/utils";
 import { Typography, Link } from "@mui/material";
@@ -49,10 +49,10 @@ export default function Disputes() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70, type: 'number', flex:1, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={params.row.id}>{params.row.id}</Link>)
+      return (<Link component={LinkRouter} to={params.row.id} children={params.row.id} />)
     }},
     { field: 'courtName', headerName: 'Court', width: 150, flex:2, renderCell: (params) => {
-      return (<Link component={LinkRouter} to={"/courts/"+params.row.subcourtID}>{params.row.courtName}</Link>)
+      return (<Link component={LinkRouter} to={"/courts/"+params.row.subcourtID} children={params.row.courtName} />)
     }},
     { field: 'currentRulling', headerName: 'Current Rulling', width: 150, flex:1, type: 'number'},
     { field: 'period', headerName: 'Period', width: 150},

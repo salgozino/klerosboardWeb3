@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import {
-  Link as LinkRouter,
   useRoutes,
+  useSearchParams,
 } from "react-router-dom";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache
+} from "@apollo/client";
+
 import Home from "./pages/Home"
 import Courts from "./pages/Courts"
 import Disputes from "./pages/Disputes"
@@ -29,8 +35,10 @@ import { Favorite, ChevronLeft, Menu, Notifications } from "@mui/icons-material"
 import { mainListItems, secondaryListItems, footerListItems } from './components/sideMenuItems';
 import { Button } from "./components/index";
 import ChainMenu from "./components/chainMenu";
+import { LinkWithQuery as LinkRouter } from "./components/LinkWithQuery";
 
 import useWeb3Modal from "./hooks/useWeb3Modal";
+import { getChainId } from "./scripts/utils";
 
 
 const drawerWidth = 240;
@@ -105,7 +113,6 @@ function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
           // Render either the ENS name or the shortened account address.
           if (name) {
             const avatar = await provider.getAvatar(name);
-            console.log(avatar)
             if (avatar) {
               render = <Avatar src={avatar} />;
             } else {
@@ -169,8 +176,23 @@ const routes = [
 ];
 
 
+
+const clientMainnet = new ApolloClient({
+  uri: 'https://api.thegraph.com/subgraphs/name/salgozino/sarasa-mainnet',
+  cache: new InMemoryCache()
+});
+
+const clientGnosis = new ApolloClient({
+  uri: 'https://api.thegraph.com/subgraphs/name/salgozino/sarasa',
+  cache: new InMemoryCache()
+});
+
+
+
 export default function App() {
   const [open, setOpen] = useState(true);
+  const [client, setClient] = useState(clientMainnet);
+  let [searchParams] = useSearchParams();
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -178,110 +200,120 @@ export default function App() {
   let element = useRoutes(routes)
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 
-  return (
-    <ThemeProvider theme={mdTheme}>
+  useEffect(() => {
+    let chainId = getChainId(searchParams)
+    if (chainId === 'xdai') {
+      setClient(clientGnosis)
+    }  else{
+      setClient(clientMainnet)
+    }
+  }, [searchParams])
+  
 
-      <Box sx={{
-        display: 'flex',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
-      }}>
-        <CssBaseline enableColorScheme />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+  return (
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={mdTheme}>
+
+        <Box sx={{
+          display: 'flex',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+        }}>
+          <CssBaseline enableColorScheme />
+          <AppBar position="absolute" open={open}>
+            <Toolbar
               sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
+                pr: '24px', // keep right padding when drawer closed
               }}
             >
-              <Menu />
-            </IconButton>
-            {/* Klerosboard label */}
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              KlerosBoard
-            </Typography>
-
-            {/* Support */}
-            <Tooltip title="Support">
-              <IconButton color="inherit" size='small' component={LinkRouter} to="/support">
-                <Favorite />
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer}
+                sx={{
+                  marginRight: '36px',
+                  ...(open && { display: 'none' }),
+                }}
+              >
+                <Menu />
               </IconButton>
-            </Tooltip>
+              {/* Klerosboard label */}
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                KlerosBoard
+              </Typography>
 
-            {/* Notifications */}
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <Notifications />
-              </Badge>
-            </IconButton>
+              {/* Support */}
+              <Tooltip title="Support">
+                <IconButton color="inherit" size='small' component={LinkRouter} to="/support" children={<Favorite />} />
+              </Tooltip>
 
-            {/* Chain changer */}
-            <ChainMenu />
+              {/* Notifications */}
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <Notifications />
+                </Badge>
+              </IconButton>
 
-            {/* Wallet connect */}
-            <WalletButton provider={provider} loadWeb3Modal={loadWeb3Modal} logoutOfWeb3Modal={logoutOfWeb3Modal} />
+              {/* Chain changer */}
+              <ChainMenu />
 
-          </Toolbar>
-        </AppBar>
+              {/* Wallet connect */}
+              <WalletButton provider={provider} loadWeb3Modal={loadWeb3Modal} logoutOfWeb3Modal={logoutOfWeb3Modal} />
 
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
+            </Toolbar>
+          </AppBar>
+
+          <Drawer variant="permanent" open={open}>
+            <Toolbar
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                px: [1],
+              }}
+            >
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeft />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            <List component="nav">
+              {mainListItems}
+              <Divider sx={{ my: 1 }} />
+              {secondaryListItems}
+            </List>
+
+            <List component="nav" sx={{
+              marginTop: 'auto'
+            }}>
+              <Divider />
+              {footerListItems}
+            </List>
+          </Drawer>
+
+
+          <Box component="main"
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
+              flexGrow: 1,
+              height: '100vh',
+              overflow: 'auto',
             }}
           >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeft />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
+            <Toolbar />
+            {element}
 
-          <List component="nav" sx={{
-            marginTop: 'auto'
-          }}>
-            <Divider />
-            {footerListItems}
-          </List>
-        </Drawer>
-
-
-        <Box component="main"
-          sx={{
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
-        >
-          <Toolbar />
-          {element}
-
+          </Box>
         </Box>
-      </Box>
-    </ThemeProvider>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };

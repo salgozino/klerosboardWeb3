@@ -1,6 +1,6 @@
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material"
 import { Card, CardContent, Link, Skeleton, Typography } from "@mui/material";
-import { Link as LinkRouter} from "react-router-dom";
+import { LinkWithQuery as LinkRouter } from "./LinkWithQuery";
 
 
 
@@ -22,7 +22,7 @@ export default function InfoCard({ info, loading, baseURL }) {
         <>
         <Typography variant="h6" component="div" align='center'>
           {baseURL ?
-            <Link component={LinkRouter} to={baseURL + '/' + info.id} variant="body">{info.value}</Link>
+            <Link component={LinkRouter} to={baseURL + '/' + info.id} variant="body" children={info.value} />
             : info.value
           }
         </Typography>

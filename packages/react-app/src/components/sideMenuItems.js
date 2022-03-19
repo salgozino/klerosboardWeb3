@@ -1,15 +1,15 @@
 
 import { Avatar, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
-import { Link as LinkRouter} from "react-router-dom";
 import { Link } from '@mui/material';
 import { Feed, Casino, Dashboard, People, Gavel, Balance, Paid } from '@mui/icons-material';
+import { LinkWithQuery as LinkRouter } from '../components/LinkWithQuery';
 import { Fragment } from 'react';
 import graphImg from '../images/graphprotocol.png';
 import githubImg from '../images/github.png';
 
 export const mainListItems = (
   <Fragment>
-    <Link component={LinkRouter} to='/'>
+    <Link component={LinkRouter} to='/' children={
       <ListItemButton>
 
         <ListItemIcon>
@@ -18,9 +18,10 @@ export const mainListItems = (
         <ListItemText primary="Dashboard" />
 
       </ListItemButton>
-    </Link>
+    }
+    />
 
-    <Link component={LinkRouter} to='/odds'>
+    <Link component={LinkRouter} to='/odds' children={
       <ListItemButton>
 
         <ListItemIcon>
@@ -29,9 +30,9 @@ export const mainListItems = (
         <ListItemText primary="Odds" />
 
       </ListItemButton>
-    </Link>
+    } />
 
-    <Link component={LinkRouter} to='/community'>
+    <Link component={LinkRouter} to='/community' children={
       <ListItemButton>
 
         <ListItemIcon>
@@ -40,7 +41,7 @@ export const mainListItems = (
         <ListItemText primary="Kleros Family" />
 
       </ListItemButton>
-    </Link>
+    } />
 
   </Fragment>
 );
@@ -51,16 +52,16 @@ export const secondaryListItems = (
       Kleros Explorer
     </ListSubheader>
 
-    <Link component={LinkRouter} to='/courts'>
+    <Link component={LinkRouter} to='/courts' children={
       <ListItemButton>
         <ListItemIcon>
           <Balance />
         </ListItemIcon>
         <ListItemText primary="Courts" />
       </ListItemButton>
-    </Link>
+    } />
 
-    <Link component={LinkRouter} to='/cases'>
+    <Link component={LinkRouter} to='/cases' children={
       <ListItemButton>
         <ListItemIcon>
           <Gavel />
@@ -69,9 +70,9 @@ export const secondaryListItems = (
         <ListItemText primary="Disputes" />
 
       </ListItemButton>
-    </Link>
+    } />
 
-    <Link component={LinkRouter} to='/arbitrables'>
+    <Link component={LinkRouter} to='/arbitrables' children={
       <ListItemButton>
         <ListItemIcon>
           <Feed />
@@ -80,9 +81,9 @@ export const secondaryListItems = (
         <ListItemText primary="Arbitrables" />
 
       </ListItemButton>
-    </Link>
+    } />
 
-    <Link component={LinkRouter} to='/stakes'>
+    <Link component={LinkRouter} to='/stakes' children={
       <ListItemButton>
 
         <ListItemIcon>
@@ -91,7 +92,7 @@ export const secondaryListItems = (
         <ListItemText primary="Stakes" />
 
       </ListItemButton>
-    </Link>
+    } />
   </Fragment>
 );
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Fragment, useState } from 'react';
 import Box from '@mui/material/Box';
 
 import Menu from '@mui/material/Menu';
@@ -7,9 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import LinkIcon from '@mui/icons-material/Link';
 import { Link } from '@mui/material';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export default function ChainMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -18,7 +20,7 @@ export default function ChainMenu() {
         setAnchorEl(null);
     };
     return (
-        <React.Fragment>
+        <Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Chain Settings">
                     <IconButton
@@ -68,17 +70,19 @@ export default function ChainMenu() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem
-                    component={Link} to="/#/?chanId=1">
+                <MenuItem>
+                <Link to="?network=mainnet" component={LinkRouter}>
                     <LinkIcon /> Mainnet
+                </Link>
                 </MenuItem>
 
-                <MenuItem 
-                    component={Link} to="/#/?chanId=1">
+                <MenuItem>
+                <Link to="?network=xdai" component={LinkRouter}>
                     <LinkIcon /> Gnosis (xDAI)
+                </Link>
                 </MenuItem>
 
             </Menu>
-        </React.Fragment>
+        </Fragment>
     );
 }

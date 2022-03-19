@@ -40,10 +40,17 @@ export async function getCourtsNames(courts) {
 
 }   
  
+export function getChainId(searchParams){
+    let chainId = searchParams.get("network");
+    if (chainId !== 'xdai'){
+        return 'mainnet'
+    } 
+    return chainId
+}
+
 
 export function wei2eth(wei) {
     wei = Number(wei);
-    // console.log(wei);
     return wei * 10**(-18);
 }
 

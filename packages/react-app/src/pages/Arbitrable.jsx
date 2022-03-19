@@ -1,5 +1,5 @@
 import { Grid, Link, Typography } from '@mui/material';
-import { Link as LinkRouter } from 'react-router-dom';
+import { LinkWithQuery as LinkRouter} from '../components/LinkWithQuery';
 import React from 'react'
 import { useQuery } from "@apollo/client";
 import { useParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function Arbitrable() {
   const dispute_cols = [
     {
       field: 'id', headerName: 'Dispute N°', type: 'number', flex: 1, renderCell: (params) => {
-        return (<Link component={LinkRouter} to={"/cases/" + params.value}>{params.value}</Link>)
+        return (<Link component={LinkRouter} to={"/cases/" + params.value} children={params.value} />)
       }
     },
     {
@@ -27,7 +27,7 @@ export default function Arbitrable() {
     },
     {
       field: 'subcourtID', headerName: 'Court', flex: 1, renderCell: (params) => {
-        return (<Link component={LinkRouter} to={"/courts/" + params.value.id}>{params.value.id}</Link>)
+        return (<Link component={LinkRouter} to={"/courts/" + params.value.id} children={params.value.id} />)
       }
     },
     { field: 'currentRulling', headerName: 'Current Rulling', flex: 1 },
