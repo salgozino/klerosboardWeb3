@@ -190,7 +190,7 @@ const clientGnosis = new ApolloClient({
 
 
 export default function App() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [client, setClient] = useState(clientMainnet);
   let [searchParams] = useSearchParams();
   const toggleDrawer = () => {
