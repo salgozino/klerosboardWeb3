@@ -3,7 +3,7 @@ import LatestDisputes from "../components/latestDisputes";
 import InfoCard from "../components/infoCard";
 import { Container, Grid, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
-import { getChainId, wei2eth } from "../scripts/utils";
+import { ETHcurrencyOptions, getChainId, PNKcurrencyOptions, wei2eth } from "../scripts/utils";
 import { KLEROSCOUNTERS } from "../graphql/klerosCounters";
 import { useSearchParams } from "react-router-dom";
 
@@ -82,10 +82,11 @@ export default function Home() {
         </Grid>
         <Grid item xs={12} md={4} zeroMinWidth>
           <InfoCard
+          
             info={
               {
                 'title': 'Total Fees in ETH',
-                'value': data ? wei2eth(data.klerosCounters[0].totalETHFees).toFixed(3) : '-'
+                'value': data ? wei2eth(data.klerosCounters[0].totalETHFees).toLocaleString(undefined, ETHcurrencyOptions) : '-'
               }}
             loading={loading}
           />
@@ -159,7 +160,7 @@ export default function Home() {
             info={
               {
                 'title': 'PNK Staked in Courts',
-                'value': data ? wei2eth(data.klerosCounters[0].tokenStaked).toFixed(0) : '-'
+                'value': data ? wei2eth(data.klerosCounters[0].tokenStaked).toLocaleString(undefined, PNKcurrencyOptions)  : '-'
               }}
             loading={loading}
           />
@@ -201,7 +202,7 @@ export default function Home() {
             info={
               {
                 'title': 'Fees Paid',
-                'value': data ? wei2eth(data.klerosCounters[0].totalETHFees).toFixed(3) : '-'
+                'value': data ? wei2eth(data.klerosCounters[0].totalETHFees).toLocaleString(undefined, ETHcurrencyOptions)  : '-'
               }}
             loading={loading}
           />
@@ -211,7 +212,7 @@ export default function Home() {
             info={
               {
                 'title': 'PNK Redistributed',
-                'value': data ? wei2eth(data.klerosCounters[0].totalTokenRedistributed).toFixed(0) : '-'
+                'value': data ? wei2eth(data.klerosCounters[0].totalTokenRedistributed).toLocaleString(undefined, PNKcurrencyOptions)  : '-'
               }}
             loading={loading}
           />

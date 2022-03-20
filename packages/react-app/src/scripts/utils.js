@@ -20,6 +20,18 @@ export const VoteChoiceMapping = {
     'Pending': 3
   }
 
+export const PNKcurrencyOptions = {
+    style: 'currency',
+    currency: 'PNK',
+    maximumFractionDigits: 0
+}
+
+export const ETHcurrencyOptions = {
+    style: 'currency',
+    currency: 'ETH',
+    maximumFractionDigits: 3
+}
+
 export async function getCourtName(policy){
     if (policy == null) return 'Unknown';
     const url = "https://ipfs.kleros.io" + policy
