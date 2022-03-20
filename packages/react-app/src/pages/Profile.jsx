@@ -64,7 +64,6 @@ export default function Profile() {
         'currentRulling': vote.dispute.currentRulling
       }
     });
-    console.log(votesParsed);
     return votesParsed
   }
 
@@ -100,7 +99,6 @@ export default function Profile() {
   const { error: error_profilevotes, data: data_profilevotes, loading: loading_profilevotes } = useQuery(PROFILEVOTES, { variables: { profileid: id.toLowerCase() } });
   if (error_profile) { console.log(error_profile) };
   if (error_profilevotes) { console.log(error_profilevotes) };
-  console.log(data_profilevotes)
 
   return (
     <Container>
@@ -168,7 +166,7 @@ export default function Profile() {
         </Grid>
       </Grid>
 
-      <Typography variant='h5'>Disputes Createad: {data_profile ? data_profile.jurors[0].numberOfDisputesAsJuror : <Skeleton variant='text' />}</Typography>
+      <Typography variant='h5'>Disputes Createad: {data_profile ? data_profile.jurors[0].disputesAsCreator.length : <Skeleton variant='text' />}</Typography>
       <DataGrid pagination
         columns={disputes_created_cols}
         rows={loading_profile ? [] : disuptesParser(data_profile.jurors[0].disputesAsCreator)}
@@ -186,7 +184,7 @@ export default function Profile() {
         columns={all_stakes_cols}
         rows={loading_profile ? [] : courtStakesParser(data_profile.jurors[0].allStakes)}
         loading={loading_profile}
-        defaultSort={{ field: 'id', sort: 'desc' }}
+        defaultSort={{ field: 'timestamp', sort: 'desc' }}
         sx={{
           justifyContent: 'space-between',
           marginBottom: '10px',
