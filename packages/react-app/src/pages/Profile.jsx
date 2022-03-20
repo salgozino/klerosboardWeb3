@@ -7,6 +7,7 @@ import { PROFILE, PROFILEVOTES } from "../graphql/profiles";
 import { DataGrid } from '@mui/x-data-grid';
 import { wei2eth } from '../scripts/utils';
 import { timestamp2Datetime } from '../scripts/timeUtils';
+import { LinkWithQuery } from '../components/LinkWithQuery';
 
 function coherency(votes) {
   var coherent_votes = 0
@@ -68,7 +69,9 @@ export default function Profile() {
   }
 
   const votes_cols = [
-    { field: 'dispute', headerName: 'Dispute', type: 'number', flex: 2 },
+    { field: 'dispute', headerName: 'Dispute', type: 'number', flex: 2, renderCell: (params) => {
+      return <LinkWithQuery to={'/cases/' + params.value} children={params.value} />;
+  }},
     { field: 'round', headerName: 'Round', flex: 1 },
     { field: 'ruled', headerName: 'Status', flex: 1 },
     { field: 'choice', headerName: 'Choice', flex: 1 },
@@ -76,7 +79,9 @@ export default function Profile() {
   ]
 
   const all_stakes_cols = [
-    { field: 'court', headerName: 'Court', type: 'string', flex: 2 },
+    { field: 'court', headerName: 'Court', type: 'string', flex: 2, renderCell: (params) => {
+      return <LinkWithQuery to={'/courts/' + params.value} children={params.value} />;
+  }},
     { field: 'stake', headerName: 'Stake', flex: 1, valueFormatter: (params) => {
       const valueFormatted = Number(params.value).toLocaleString(undefined, { maximumFractionDigits: 0 });
       return `${valueFormatted}`;
@@ -89,7 +94,9 @@ export default function Profile() {
   ]
 
   const disputes_created_cols = [
-    { field: 'id', headerName: 'Dispute', type: 'number', flex: 1 },
+    { field: 'id', headerName: 'Dispute', type: 'number', flex: 1, renderCell: (params) => {
+      return <LinkWithQuery to={'/cases/' + params.value} children={params.value} />;
+  }},
     { field: 'timestamp', headerName: 'Date', flex: 2 },
     { field: 'currentRulling', headerName: 'Current Rulling', flex: 1 },
     { field: 'txid', headerName: 'TxID', flex: 2 }
