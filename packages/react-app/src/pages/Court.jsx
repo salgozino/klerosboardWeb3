@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Skeleton from '@mui/material/Skeleton';
 import { Grid, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { LinkWithQuery } from '../components/LinkWithQuery';
 
 
 
@@ -41,9 +42,11 @@ export default function Court() {
     const rewardCurrency = chainId === 'xdai' ? 'xDAI' : 'ETH'
 
     const jurors_cols = [
-        { field: 'id', headerName: 'Juror', width: 400, type: 'string', flex: 2 },
+        { field: 'id', headerName: 'Juror', width: 400, type: 'string', flex: 2, renderCell: (params) => {
+            return <LinkWithQuery to={'/profile/' + params.value} children={params.value} />;
+        }},
         {
-            field: 'stake', headerName: 'Stake', width: 200, flex: 1, renderCell: (params) => {
+            field: 'stake', headerName: 'Stake', width: 200, type: 'number', flex: 1, renderCell: (params) => {
                 const options = {
                     style: 'currency',
                     currency: 'PNK',
@@ -55,7 +58,9 @@ export default function Court() {
     ]
 
     const dispute_cols = [
-        { field: 'id', headerName: 'Dispute N°', width: 100, type: 'string', flex: 1 },
+        { field: 'id', headerName: 'Dispute N°', width: 100, type: 'number', flex: 1, renderCell: (params) => {
+            return <LinkWithQuery to={'/cases/' + params.value} children={params.value} />;
+        }},
         { field: 'status', headerName: 'Status', width: 100, flex: 1 },
         { field: 'currentRulling', headerName: 'Current Rulling', width: 120, flex: 1 },
         { field: 'lastPeriodChange', headerName: 'Last Period Change', width: 180, flex: 2 },
@@ -201,7 +206,7 @@ export default function Court() {
             </Grid>
 
             <Grid container spacing={2}>
-                <Grid item xs={12} md={6} zeroMinWidth>
+                <Grid item xs={12} md={5} zeroMinWidth>
                     <Typography variant='h5'>Jurors</Typography>
                     <DataGrid pagination
                         columns={jurors_cols}
@@ -216,7 +221,7 @@ export default function Court() {
                     />
                 </Grid>
 
-                <Grid item xs={12} md={6} zeroMinWidth>
+                <Grid item xs={12} md={7} zeroMinWidth>
                     <Typography variant='h5'>Disputes</Typography>
                     <DataGrid pagination
                         columns={dispute_cols}
