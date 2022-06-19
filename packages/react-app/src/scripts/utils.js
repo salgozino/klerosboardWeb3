@@ -15,8 +15,8 @@ export const VotesMapping = {
 
 export const VoteChoiceMapping = {
     'Refuse to arbitrate': 0,
-    'No': 1,
-    'Yes': 2,
+    'Yes': 1,
+    'No': 2,
     'Pending': 3
   }
 
