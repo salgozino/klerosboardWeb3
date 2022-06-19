@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import {
   useRoutes,
@@ -31,6 +31,8 @@ import MuiAppBar from '@mui/material/AppBar';
 import { Box, Toolbar, List, Typography, Divider, IconButton, Badge, Avatar } from "@mui/material";
 import { Tooltip } from "@material-ui/core";
 import { Favorite, ChevronLeft, Menu, Notifications } from "@mui/icons-material";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { mainListItems, secondaryListItems, footerListItems } from './components/sideMenuItems';
 import { Button } from "./components/index";
@@ -192,6 +194,25 @@ const clientGnosis = new ApolloClient({
 export default function App() {
   const [open, setOpen] = useState(false);
   const [client, setClient] = useState(clientMainnet);
+  const [mode, setMode] = useState('dark');
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
   let [searchParams] = useSearchParams();
   const toggleDrawer = () => {
     setOpen(!open);
@@ -212,7 +233,7 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={mdTheme}>
+      <ThemeProvider theme={theme}>
 
         <Box sx={{
           display: 'flex',
@@ -250,6 +271,13 @@ export default function App() {
               >
                 KlerosBoard
               </Typography>
+              
+              {/* Theme mode switch */}
+                <Tooltip title={theme.palette.mode + " mode"}>
+                  <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+                    {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                  </IconButton>
+                </Tooltip>
 
               {/* Support */}
               <Tooltip title="Support">
