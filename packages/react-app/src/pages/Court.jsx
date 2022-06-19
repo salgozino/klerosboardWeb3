@@ -191,16 +191,16 @@ export default function Court() {
 
                 {/* Fourth Line */}
                 <Grid item xs={12} md={3} zeroMinWidth>
-                    <InfoCard loading={loading_court} info={{ 'title': 'Active Jurors of this court', 'value': loading_court ? null : data_court.courts[0].activeJurors }} />
+                    <InfoCard loading={loading_court} info={{ 'title': 'Jurors staked directly in this court', 'value': 'soon' }} />
                 </Grid>
                 <Grid item xs={12} md={3} zeroMinWidth>
-                    <InfoCard loading={loading_court} info={{ 'title': 'Active Jurors with subcourts', 'value': loading_court ? null : data_court.courts[0].activeJurors }} />
+                    <InfoCard loading={loading_court} info={{ 'title': 'Total jurors elegibles', 'value': loading_court ? null : data_court.courts[0].activeJurors }} />
                 </Grid>
                 <Grid item xs={12} md={3} zeroMinWidth>
-                    <InfoCard loading={loading_court} info={{ 'title': 'Token Staked in this court', 'value': loading_court ? null : wei2eth(data_court.courts[0].tokenStaked).toFixed(0) }} />
+                    <InfoCard loading={loading_court} info={{ 'title': 'Token Staked directly in this court', 'value': 'soon' }} />
                 </Grid>
                 <Grid item xs={12} md={3} zeroMinWidth>
-                    <InfoCard loading={loading_court} info={{ 'title': 'Token Staked with subcourts', 'value': loading_court ? null : wei2eth(data_court.courts[0].tokenStaked).toFixed(0) }} />
+                    <InfoCard loading={loading_court} info={{ 'title': 'Total tokens in this court', 'value': loading_court ? null : wei2eth(data_court.courts[0].tokenStaked).toFixed(0) }} />
                 </Grid>
 
             </Grid>
