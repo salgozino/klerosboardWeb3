@@ -18,7 +18,7 @@ function parseVotes(votes){
             'id': vote.voteID,
             'voted': vote.voted,
             'timestamp': vote.timestamp,
-            'voteDate': vote.timestamp ? timestamp2Datetime(vote.timestamp/1000) : '-',
+            'voteDate': vote.timestamp ? timestamp2Datetime(vote.timestamp) : '-',
         })
     })
     return newVotes
