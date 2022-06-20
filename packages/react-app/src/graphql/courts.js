@@ -54,6 +54,7 @@ export const COURT = gql`
             }
             childs {
                 id
+                policy{policy}
             }
             activeJurors
             disputesNum

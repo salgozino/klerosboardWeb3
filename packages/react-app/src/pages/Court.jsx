@@ -12,7 +12,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { LinkWithQuery } from '../components/LinkWithQuery';
 
 
-
 function courtStakesParser(courtStakes) {
     return courtStakes.map(courtStake => {
         return { 'id': courtStake.juror.id, 'stake': wei2eth(courtStake.stake) }
@@ -37,14 +36,19 @@ export default function Court() {
     const { id } = useParams();
     const [courtName, setCourtName] = useState(null);
     const [parentCourtName, setParentCourtName] = useState(null);
+    const [childCourtName, setChildCourtName] = useState([]);
+    const [loadingChildCourtNames, setLoadingChildCourtNames] = useState(true);
     let [searchParams] = useSearchParams();
     let chainId = getChainId(searchParams);
     const rewardCurrency = chainId === 'xdai' ? 'xDAI' : 'ETH'
 
+
     const jurors_cols = [
-        { field: 'id', headerName: 'Juror', width: 400, type: 'string', flex: 2, renderCell: (params) => {
-            return <LinkWithQuery to={'/profile/' + params.value} children={params.value} />;
-        }},
+        {
+            field: 'id', headerName: 'Juror', width: 400, type: 'string', flex: 2, renderCell: (params) => {
+                return <LinkWithQuery to={'/profile/' + params.value} children={params.value} />;
+            }
+        },
         {
             field: 'stake', headerName: 'Stake', width: 200, type: 'number', flex: 1, renderCell: (params) => {
                 const options = {
@@ -58,9 +62,11 @@ export default function Court() {
     ]
 
     const dispute_cols = [
-        { field: 'id', headerName: 'Dispute N°', width: 100, type: 'number', flex: 1, renderCell: (params) => {
-            return <LinkWithQuery to={'/cases/' + params.value} children={params.value} />;
-        }},
+        {
+            field: 'id', headerName: 'Dispute N°', width: 100, type: 'number', flex: 1, renderCell: (params) => {
+                return <LinkWithQuery to={'/cases/' + params.value} children={params.value} />;
+            }
+        },
         { field: 'status', headerName: 'Status', width: 100, flex: 1 },
         { field: 'currentRulling', headerName: 'Current Rulling', width: 120, flex: 1 },
         { field: 'lastPeriodChange', headerName: 'Last Period Change', width: 180, flex: 2 },
@@ -99,35 +105,71 @@ export default function Court() {
             }
         };
         if (!loading_court && data_court) {
-            if (data_court.courts.length !== 0){
+            if (data_court.courts.length !== 0) {
                 if (data_court.courts[0].parent !== null) {
                     const parent = data_court.courts[0].parent;
                     if (parent.policy !== null) {
                         getParentName(parent.policy.policy);
                     }
                 }
-        }
+            }
         };
     }, [loading_court, data_court]
     )
+
+    useEffect(() => {
+        async function fetchCourtName(policy) {
+            const cn = await getCourtName(policy);
+            return cn
+        };
+
+        async function fetchData(data_court) {
+            if (data_court) {
+                if (data_court.courts.length !== 0) {
+                    if (data_court.courts[0].childs.length > 0) {
+                        let child_names_promises = []
+                        let current_name = ""
+                        data_court.courts[0].childs.forEach((child) => {
+                            if (child.policy !== null) {
+                                current_name = fetchCourtName(child.policy.policy)
+                                child_names_promises.push(current_name)
+                            }
+                        });
+                        await Promise.all(child_names_promises).then(values => {
+                            setChildCourtName(values);
+                            setLoadingChildCourtNames(false);
+                        }
+                        )
+                    } else {
+                        // no child
+                        setLoadingChildCourtNames(false);
+                    }
+                }
+            };
+        }
+        setLoadingChildCourtNames(true);
+        fetchData(data_court);
+    }, [data_court, loading_court]
+    );
+
     const columnSpacing = 2;
     const rowSpacing = 1;
 
     if (!loading_court && data_court) {
-        if (data_court.courts.length === 0){
+        if (data_court.courts.length === 0) {
             console.log("The court " + id + " doesn't exist")
-        return (
-            <Typography variant='h5'>Error. This court doesn't exist</Typography>
-        )
+            return (
+                <Typography variant='h5'>Error. This court doesn't exist</Typography>
+            )
         }
     }
     return (
         <>
 
-            <Typography variant='h4' sx={{ marginBottom: '15px', width:'80%'}}>
-                Court {id}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%'/>}
+            <Typography variant='h4' sx={{ marginBottom: '15px', width: '80%' }}>
+                Court {id}: {courtName ? courtName : <Skeleton variant='text' animation='wave' width='50%' />}
             </Typography>
-            
+
             {/* First Line */}
             <Grid container columnSpacing={columnSpacing} rowSpacing={rowSpacing}>
                 <Grid item xs={12} md={3} zeroMinWidth>
@@ -144,12 +186,14 @@ export default function Court() {
                 </Grid>
                 <Grid item xs={12} md={3} zeroMinWidth>
                     <InfoCardList
-                        loading={loading_court}
-                        baseURL={data_court ? data_court.courts[0].childs.length > 0 ? "/courts" : null : null}
+                        loading={loadingChildCourtNames && data_court !== null}
+                        baseURL={childCourtName ? childCourtName.length > 0 ? "/courts" : null : null}
+                        indexLink={true}
                         info={
                             {
                                 'title': 'Children Courts',
-                                'values': loading_court ? null : data_court.courts[0].childs.map((child) => { return child.id; })
+                                'values': childCourtName.length > 0 ? childCourtName : [null],
+                                'links': data_court? data_court.courts[0].childs.length > 0 ? data_court.courts[0].childs.map((child) => {return child.id}): [null] : [null]
                             }
                         } />
                 </Grid>

@@ -16,11 +16,12 @@ export default function InfoCardList({ info, loading, baseURL }) {
           {loading
             ? <Skeleton variant="rectangular" width={210} height={118} />
             : info.values.map((item, i) => {
+              let links = info.links? info.links : Array(info.values.length).fill("");
               return (
                 <ListItem key={i}>
                   <ListItemText
                     primary={baseURL ?
-                      <Link component={LinkRouter} to={baseURL + '/' + item} children={item} />
+                      <Link component={LinkRouter} to={baseURL + '/' + links[i]} children={item} />
                       : item
                     }
                   />
