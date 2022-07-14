@@ -8,8 +8,8 @@ export const PeriodIndex = {
 
 export const VotesMapping = {
     0 : 'Refuse to arbitrate',
-    1 : 'No',
-    2 : 'Yes',
+    1 : 'Yes',
+    2 : 'No',
     3 : 'Pending'
   }
 
